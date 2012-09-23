@@ -1,3 +1,5 @@
 $(document).ready(function() {
-    //alert("hi!")
+    $("#search_button").click(function() {
+        $("#video").css("display", "inline");
+    });
 });
