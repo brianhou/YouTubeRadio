@@ -11,8 +11,9 @@ function ytsearch(keyword){
     $.getJSON(url, data, function(data) {
         var items = [];
         $.each(data.feed.entry, function(key, val) {
-            $("#search_results").append("<tr><td>" + val.title.$t + "</td></tr>");
+		items.push("<tr><td>" + val.title.$t + "</td></tr>");
         });
+            $("#search_results").html(items.join());
 
     });
 }
