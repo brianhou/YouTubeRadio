@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     $("#search_button").click(ytsearch);
-    $("#search_query").keypress(ytsearch);
+    $("#search_query").keyup(ytsearch);
     //$("#player").css("display", "inline");
 });
 
