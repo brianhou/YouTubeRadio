@@ -1,6 +1,7 @@
 $(document).ready(function() {
     
     $("#search_button").click(ytsearch);
+    $("#search_query").keypress(ytsearch);
     //$("#player").css("display", "inline");
 });
 
@@ -11,7 +12,7 @@ function ytsearch(keyword){
     $.getJSON(url, data, function(data) {
         var items = [];
         $.each(data.feed.entry, function(key, val) {
-		items.push("<tr><td>" + val.title.$t + "</td></tr>");
+		items.push("<tr><td><img src=\"" + val.media$group.media$thumbnail[1].url + "\"/></td><td>" + val.title.$t + "</td></tr>");
         });
             $("#search_results").html(items.join());
 
