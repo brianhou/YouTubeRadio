@@ -13,7 +13,7 @@ function ytsearch(keyword){
             $.getJSON(url, data, function(data) {
                 var items = [];
                 $.each(data.feed.entry, function(key, val) {
-                        items.push("<tr><td><a href=\"" + val.content.src + "\"><img src=\"" + val.media$group.media$thumbnail[1].url + "\"/></a></td><td><em>" + val.title.$t + "</em><br>by " + val.author[0].name.$t + "</td></tr>");
+                        items.push("<tr><td><a href=\"" + val.content.src + "\"><img src=\"" + val.media$group.media$thumbnail[1].url + "\"/></a></td><td><em>" + val.title.$t + "</em><br>by " + val.author[0].name.$t + "<br>" + val.media$group.yt$duration.seconds + " seconds | " + val.yt$statistics.viewCount + " views</td></tr>");
                 });
                 $("#search_results").html(items.join());
 
