@@ -17,7 +17,7 @@ function secondsToHMS(d) {
     d = Number(d);
     var h = Math.floor(d / 3600), m = Math.floor((d % 3600) / 60), s = d % 60;
     return ((h > 0 ? h + ":" : "") + (m > 0 ? (h > 0 && m < 10 ? "0" : "") + m + ":" : "0:") + (s < 10 ? "0" : "") + s);
-}
+};
 
 function numAddCommas(n) {
     var rgx = /(\d+)(\d{3})/;
@@ -25,7 +25,9 @@ function numAddCommas(n) {
         n = n.replace(rgx, '$1' + ',' + '$2');
     }
     return n;
-}
+};
+
+function goTo(URL) {document.location.href = URL;};
 
 function ytsearch(keyword) {
     var query = $("#search_query").val();
@@ -35,7 +37,7 @@ function ytsearch(keyword) {
         $.getJSON(url, data, function (data) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
-                items.push("<tr><td><a href=\"{0}\"><img src=\"{1}\"/></a></td><td><strong>{2}</strong><br>by {3}<br>{4} | {5} views</td></tr>".format(
+                items.push("<tr onClick=\"document.location.href='{0}';\" style=\"cursor:pointer\"><td><img src=\"{1}\"/></a></td><td><strong>{2}</strong><br>by {3}<br>{4} | {5} views</td></tr>".format(
 		    val.content.src,
 		    val.media$group.media$thumbnail[1].url,
 		    val.title.$t,
@@ -51,3 +53,5 @@ function ytsearch(keyword) {
         $("#search_results").html("");
     }
 }
+
+// <a href=\"{0}\">
