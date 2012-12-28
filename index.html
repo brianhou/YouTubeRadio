@@ -2,21 +2,20 @@
 <html>
     <head>
         <title>YouTubeRadio</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="icon" type="image/png" href="favicon.png">
-	<!-- should replace this with our own logo; this logo is stolen from http://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Radio.svg/48px-Radio.svg.png -->
-        <script src="jquery.min.js"></script>
-	<!-- downloaded this from http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js -->
-        <script src="search.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <link rel="icon" type="image/png" href="static/images/favicon.png">
+        <!-- should replace this with our own logo; this logo is stolen from http://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Radio.svg/48px-Radio.svg.png -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="static/scripts/search.js"></script>
     </head>
     <body>
         <div id="header"> 
             <!--<h1>YouTube Radio!</h1> -->
-            <a href="." ><img src="logo.png" alt="YouTube Radio!"/></a>
+            <a href="." ><img src="static/images/logo.png" alt="YouTube Radio!"/></a>
         </div> 
 
         <div id="search_bar">
-            <table class="center"> <!-- this is not very pretty :( -->
+            <table class="center">
                 <tr>
                     <td>
                         <input autofocus id="search_query" type="text" name="search" placeholder="What are you looking for?">
