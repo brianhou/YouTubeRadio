@@ -1,36 +1,27 @@
 body {
-    text-align: center;
-    background: url(images/cream_dust.png)
-}
+  text-align: center;
+  background: url(images/cream_dust.png); }
 
 .center {
-    margin: 0px auto;
-}
+  margin: 0px auto; }
 
 /* tr { */
 /*     border-radius: 10px; */
 /* } */
-
 #search_bar {
-    display: inline-block;
-    border: 1px solid;
-}
+  display: inline-block;
+  border: 1px solid; }
 
 #content {
-    text-align: left;
-    padding: 10px;
-    margin: 50px auto;
-}
+  text-align: left;
+  padding: 10px;
+  margin: 50px auto; }
 
 #search_results {
-    border: 1px;
-}
-
-#search_results tr:hover{
-    background-color: lightgrey;/*#FFFFFF;#F5E9D2;*/
-    border: black 1px solid;
-}
-
-img {
-    border-radius: 10px;
-}
+  border: 1px; }
+  #search_results tr:hover {
+    background-color: lightgrey;
+    /*#FFFFFF;#F5E9D2;*/
+    border: black 1px solid; }
+  #search_results img {
+    border-radius: 10px; }
