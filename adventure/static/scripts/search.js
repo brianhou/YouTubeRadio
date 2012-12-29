@@ -29,7 +29,8 @@ function numAddCommas(n) {
     return n;
 };
 
-function ytsearch(keyword) {
+function ytsearch(event) {
+	event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
         var url = "https://gdata.youtube.com/feeds/api/videos";
@@ -58,4 +59,5 @@ function ytsearch(keyword) {
     else {
         $("#search_results").html("");
     }
+    return false;
 }
