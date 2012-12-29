@@ -1,5 +1,7 @@
 $(document).ready(function () {
+	// Initialize search button function
     $("#search_button").click(ytsearch);
+    // Initialize "instant" search function
     $("#search_query").keyup(ytsearch);
     //$("#player").css("display", "inline");
 });
@@ -7,8 +9,8 @@ $(document).ready(function () {
 String.prototype.format = function() {
     var formatted = this;
     for (var i=0; i < arguments.length; i++) {
-	var regexp = new RegExp('\\{'+i+'\\}', 'g');
-	formatted = formatted.replace(regexp, arguments[i]);
+    	var regexp = new RegExp('\\{'+i+'\\}', 'g');
+    	formatted = formatted.replace(regexp, arguments[i]);
     }
     return formatted;
 };
@@ -27,8 +29,6 @@ function numAddCommas(n) {
     return n;
 };
 
-function goTo(URL) {document.location.href = URL;};
-
 function ytsearch(keyword) {
     var query = $("#search_query").val();
     if (query) {
@@ -37,14 +37,18 @@ function ytsearch(keyword) {
         $.getJSON(url, data, function (data) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
-                items.push("<tr onClick=\"document.location.href='{0}';\" style=\"cursor:pointer\"><td><img src=\"{1}\"/></a></td><td><strong>{2}</strong><br>by {3}<br>{4} | {5} views</td></tr>".format(
-		    val.content.src,
-		    val.media$group.media$thumbnail[1].url,
-		    val.title.$t,
-		    val.author[0].name.$t,
-		    secondsToHMS(val.media$group.yt$duration.seconds),
-		    numAddCommas(val.yt$statistics.viewCount))
-		);
+                var html = "<tr onClick=\"document.location='{0}';\">" +
+                			"<td><img src=\"{1}\"/></a></td>" +
+                			"<td><strong>{2}</strong><br>by {3}<br>{4} | {5} views</td>" +
+                			"</tr>"
+            	items.push(html.format(
+						    val.content.src,
+						    val.media$group.media$thumbnail[1].url,
+						    val.title.$t,
+						    val.author[0].name.$t,
+						    secondsToHMS(val.media$group.yt$duration.seconds),
+						    numAddCommas(val.yt$statistics.viewCount))
+            	);
             });
             $("#search_results").html(items.join());
         });
@@ -53,5 +57,3 @@ function ytsearch(keyword) {
         $("#search_results").html("");
     }
 }
-
-// <a href=\"{0}\">

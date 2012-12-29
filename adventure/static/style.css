@@ -19,9 +19,11 @@ body {
 
 #search_results {
   border: 1px; }
-  #search_results tr:hover {
-    background-color: lightgrey;
-    /*#FFFFFF;#F5E9D2;*/
-    border: black 1px solid; }
+  #search_results tr {
+    cursor: pointer; }
+    #search_results tr:hover {
+      background-color: lightgrey;
+      display: table;
+      border: black 1px solid; }
   #search_results img {
     border-radius: 10px; }

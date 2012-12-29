@@ -25,10 +25,15 @@ body {
 #search_results {
     border: 1px;
     
-    tr:hover{
-        background-color: lightgrey;/*#FFFFFF;#F5E9D2;*/
-        border: black 1px solid;
+    tr {
+        cursor: pointer;
+        &:hover{
+            background-color: lightgrey;
+            display: table;
+            border: black 1px solid;
+        }
     }
+    
     
 	img {
 	    border-radius: 10px;
