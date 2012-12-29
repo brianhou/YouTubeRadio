@@ -60,6 +60,7 @@ function ytsearch(keyword) {
     else {
         $("#search_results").html("");
     }
+    return false;
 }
 
 // Reading the JSON output for search results and noting possibly useful things:
