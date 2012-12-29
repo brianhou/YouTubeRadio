@@ -23,17 +23,54 @@ body {
 }
 
 #search_results {
-    border: 1px;
+    padding: 10px 0;
+    margin: auto;
+    max-width: 55%;
     
-    tr {
-        cursor: pointer;
+    .clear {
+        clear: both;
+    }
+
+    .result {
+        position: relative;
+        padding: 10px;
+        margin: 10px;
+
+        border: {
+            width: 1px;
+            color: transparent;
+            style: solid;
+            left: {
+                width: 0px;
+            }
+            right: {
+                width: 0px;
+            }
+        }
+
         &:hover{
             background-color: lightgrey;
-            border: black 1px solid;
+            border: {
+                color: black;
+            }
         }
+
+        span {
+            position:absolute; 
+            width:100%;
+            height:100%;
+            top:0;
+            left: 0;
+            /* In case any other links are present */
+            z-index: 1;
+            /* IE Hack */
+            background-image: url('images/empty.gif');
+        }   
     }
     
-	img {
-	    border-radius: 10px;
-	}
+    img {
+        float: left;
+        margin-right: 15px;
+        border-radius: 10px;
+    }
 }

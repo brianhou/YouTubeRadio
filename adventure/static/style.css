@@ -18,11 +18,34 @@ body {
   margin: 50px auto; }
 
 #search_results {
-  border: 1px; }
-  #search_results tr {
-    cursor: pointer; }
-    #search_results tr:hover {
+  padding: 10px 0;
+  margin: auto;
+  max-width: 55%; }
+  #search_results .clear {
+    clear: both; }
+  #search_results .result {
+    position: relative;
+    padding: 10px;
+    margin: 10px;
+    border-width: 1px;
+    border-color: transparent;
+    border-style: solid;
+    border-left-width: 0px;
+    border-right-width: 0px; }
+    #search_results .result:hover {
       background-color: lightgrey;
-      border: black 1px solid; }
+      border-color: black; }
+    #search_results .result span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      /* In case any other links are present */
+      z-index: 1;
+      /* IE Hack */
+      background-image: url("images/empty.gif"); }
   #search_results img {
+    float: left;
+    margin-right: 15px;
     border-radius: 10px; }

@@ -37,10 +37,12 @@ function ytsearch(keyword) {
         $.getJSON(url, data, function (data) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
-                var html = "<tr onClick=\"document.location='{0}';\">" +
-                			"<td><img src=\"{1}\"/></a></td>" +
-                			"<td><strong>{2}</strong><br>by {3}<br>{4} | {5} views</td>" +
-                			"</tr>"
+                var html = "<div class=\"result\">" +
+                			"<img src=\"{1}\"/>" +
+                			"<div><b><a href=\"{0}\"><span></span>{2}</a></b><br>" +
+                			"by {3}<br>" +
+                			"{4} | {5} views</div>" +
+                			"<div class=\"clear\"></div></div>";
             	items.push(html.format(
 						    val.content.src,
 						    val.media$group.media$thumbnail[1].url,
@@ -50,7 +52,7 @@ function ytsearch(keyword) {
 						    numAddCommas(val.yt$statistics.viewCount))
             	);
             });
-            $("#search_results").html(items.join());
+            $("#search_results").html(items.join(""));
         });
     }
     else {
