@@ -1,8 +1,3 @@
-// Reading the JSON output for search results and noting possibly useful things:
-//     val.link[4].href is the related videos feed
-//     val.gd$rating.average is the score from 1 to 5
-//     val.media$group.yt$videoid is the video id
-
 var watchHistory = [];
 var related = [];
 var oldRelated = [];
@@ -15,9 +10,10 @@ var oldRelated = [];
 function watch(videoID) {
     watchHistory.push(videoID);
     // playVideo(videoID)
-    var relatedURL = "https://gdata.youtube.com/feeds/api/videos/" + videoID + "/related"
+    // var relatedURL = "https://gdata.youtube.com/feeds/api/videos/" + videoID + "/related"
+    var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID)
     // I think the scope is okay here, but I'll double check later
-    oldRelated = related;
+    oldRelated.push(related) // append the previous related list to the oldRelated list
     related = getRelated(relatedURL);
 }
 
@@ -39,4 +35,3 @@ function getRelated(relatedVideosURL) {
 	});
     });
 }
-
