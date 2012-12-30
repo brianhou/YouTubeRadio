@@ -1,10 +1,34 @@
+var suggestCallBack; // global var for autocomplete jsonp
+
 $(document).ready(function () {
     // Initialize search button function
     $("#search_button").click(ytsearch);
     // Initialize "instant" search function
     $("#search_query").keyup(ytsearch);
-    //$("#player").css("display", "inline");
+    // Initialize autocomplete for search terms
+    $("#search_query").autocomplete({
+        source: function(request, response) {
+            $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
+                { 
+                  "hl":"en", // Language
+                  "ds":"yt", // Restrict lookup to youtube
+                  "jsonp":"suggestCallBack", // jsonp callback function name
+                  "q":request.term, // query term
+                  "client":"youtube" // force youtube style response, ie json
+                }
+            );
+            suggestCallBack = function (data) {
+                var suggestions = [];
+                $.each(data[1], function(key, val) {
+                    suggestions.push({"value":val[0]});
+                });
+                suggestions.length = 5;
+                response(suggestions);
+            };
+        },
+    });
 });
+
 
 String.prototype.format = function() {
     var formatted = this;
@@ -61,15 +85,5 @@ function ytsearch(keyword) {
         $("#search_results").html("");
     }
     return false;
-}
-
-function autocomplete () {
-    // hl=en <- language of query
-    // ds=yt <- restricts search to youtube
-    // client=youtube <- forces youtube style output (i.e. jsonp)
-    // jsonp=p <- name of jsonp callback function
-    // q={0} <- query term
-    // callback=? <- species jsonp query for jquery
-    $.getJSON("http://suggestqueries.google.com/complete/search?hl=en&ds=yt&jsonp=p&q=obama&client=youtube&callback=?");
 }
 
