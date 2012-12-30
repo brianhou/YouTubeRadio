@@ -63,4 +63,13 @@ function ytsearch(keyword) {
     return false;
 }
 
+function autocomplete () {
+    // hl=en <- language of query
+    // ds=yt <- restricts search to youtube
+    // client=youtube <- forces youtube style output (i.e. jsonp)
+    // jsonp=p <- name of jsonp callback function
+    // q={0} <- query term
+    // callback=? <- species jsonp query for jquery
+    $.getJSON("http://suggestqueries.google.com/complete/search?hl=en&ds=yt&jsonp=p&q=obama&client=youtube&callback=?");
+}
 
