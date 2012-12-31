@@ -41,12 +41,12 @@ function ytsearch(keyword) {
             $.each(data.feed.entry, function (key, val) {
                 var html = "<div class=\"result\">" +
                 			"<img src=\"{1}\"/>" +
-                			"<div><b><a href=\"{0}\"><span></span>{2}</a></b><br>" +
+                			"<div><b><a href=\"/play?id={0}\"><span></span>{2}</a></b><br>" +
                 			"by {3}<br>" +
                 			"{4} | {5} views</div>" +
                 			"<div class=\"clear\"></div></div>";
             	items.push(html.format(
-						    val.content.src,
+						    val.media$group.yt$videoid.$t,
 						    val.media$group.media$thumbnail[1].url,
 						    val.title.$t,
 						    val.author[0].name.$t,
