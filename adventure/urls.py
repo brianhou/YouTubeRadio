@@ -8,7 +8,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'YouTubeRadio.views.home', name='home'),
     # url(r'^', include('YouTubeRadio.adventure.urls')),
-    url(r'^$', 'adventure.views.index')
+    url(r'^$', 'adventure.views.index'),
+    url(r'^play/$', 'adventure.views.play'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
