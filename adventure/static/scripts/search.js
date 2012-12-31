@@ -31,9 +31,11 @@ $(document).ready(function () {
 
 var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ'
 
-function ytsearch(keyword) {
+function ytsearch(event) {
+    event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
+        $("#ytplayer").hide();
         var url = "https://gdata.youtube.com/feeds/api/videos";
         var data = {"q":query, "alt":"json", "max-results":"5", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
         $.getJSON(url, data, function (data) {
@@ -41,7 +43,7 @@ function ytsearch(keyword) {
             $.each(data.feed.entry, function (key, val) {
                 var html = "<div class=\"result\">" +
                 			"<img src=\"{1}\"/>" +
-                			"<div><b><a href=\"/play?id={0}\"><span></span>{2}</a></b><br>" +
+                			"<div><b><a href=\"/play/{0}\"><span></span>{2}</a></b><br>" +
                 			"by {3}<br>" +
                 			"{4} | {5} views</div>" +
                 			"<div class=\"clear\"></div></div>";
@@ -55,11 +57,16 @@ function ytsearch(keyword) {
             	);
             });
             $("#search_results").html(items.join(""));
+            $(".result a").click(resultClick);
         });
     }
     else {
         $("#search_results").html("");
     }
-    return false;
 }
 
+function resultClick(event) {
+    event.preventDefault();
+    $("#search_results").html("");
+    loadYTPlayer(this.href.split('/').reverse()[0]);
+}

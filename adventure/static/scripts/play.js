@@ -1,18 +1,18 @@
-$(document).ready(function () {
+function loadYTPlayer(videoID) {
+    currentVideo = videoID;
     var params = { allowScriptAccess: "always" };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
-    swfobject.embedSWF("http://www.youtube.com/v/QK8mJJJvaes?enablejsapi=1&playerapiid=ytplayer&version=3",
+    swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(videoID),
         "ytplayer", "425", "356", "8", null, null, params, atts);
-
-});
+}
 
 var ytplayer;
 
 function onYouTubePlayerReady(playerId) {
   ytplayer = document.getElementById("ytplayer");
   ytplayer.addEventListener("onStateChange", "playerStateChangeListener");
-  watch("QK8mJJJvaes");
+  watch(currentVideo);
 }
 
 function playerStateChangeListener(event) {
@@ -21,6 +21,7 @@ function playerStateChangeListener(event) {
     }
 }
 
+var currentVideo;
 var watchHistory = [];
 var related = [];
 var oldRelated = [];
@@ -32,8 +33,8 @@ var oldRelated = [];
 // Placeholder
 function watch(videoID) {
     if (ytplayer) {
+        currentVideo = videoID;
         watchHistory.push(videoID);
-
         ytplayer.loadVideoById(videoID);
 
         var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID)
