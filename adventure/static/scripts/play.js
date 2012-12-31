@@ -1,3 +1,11 @@
+$(document).ready(function () {
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "ytplayer" };
+    swfobject.embedSWF("http://www.youtube.com/v/VIDEO_ID?enablejsapi=1&playerapiid=ytplayer&version=3",
+        "ytplayer", "425", "356", "8", null, null, params, atts);
+
+});
+
 var watchHistory = [];
 var related = [];
 var oldRelated = [];

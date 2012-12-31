@@ -3,7 +3,7 @@ body {
   background: url(images/cream_dust.png); }
 
 .center {
-  margin: 0px auto; }
+  margin: 0 auto; }
 
 /* tr { */
 /*     border-radius: 10px; */
@@ -53,3 +53,7 @@ body {
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {
   background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat; }
+
+object#ytplayer {
+  margin: 0 auto;
+  display: block; }
