@@ -1,10 +1,24 @@
 $(document).ready(function () {
     var params = { allowScriptAccess: "always" };
     var atts = { id: "ytplayer" };
-    swfobject.embedSWF("http://www.youtube.com/v/VIDEO_ID?enablejsapi=1&playerapiid=ytplayer&version=3",
+    // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
+    swfobject.embedSWF("http://www.youtube.com/v/QK8mJJJvaes?enablejsapi=1&playerapiid=ytplayer&version=3",
         "ytplayer", "425", "356", "8", null, null, params, atts);
 
 });
+
+var ytplayer;
+
+function onYouTubePlayerReady(playerId) {
+  ytplayer = document.getElementById("ytplayer");
+  ytplayer.addEventListener("onStateChange", "playerStateChangeListener");
+}
+
+function playerStateChangeListener(event) {
+    if(event == YT.PlayerState.ENDED) {
+        //playNext();
+    }
+}
 
 var watchHistory = [];
 var related = [];
@@ -16,13 +30,15 @@ var oldRelated = [];
 
 // Placeholder
 function watch(videoID) {
-    watchHistory.push(videoID);
-    // playVideo(videoID)
-    // var relatedURL = "https://gdata.youtube.com/feeds/api/videos/" + videoID + "/related"
-    var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID)
-    // I think the scope is okay here, but I'll double check later
-    oldRelated.push(related) // append the previous related list to the oldRelated list
-    related = getRelated(relatedURL);
+    if (ytplayer) {
+        watchHistory.push(videoID);
+
+        ytplayer.loadVideoById(videoID);
+
+        var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID)
+        oldRelated.push(related) // append the previous related list to the oldRelated list
+        related = getRelated(relatedURL);
+    }
 }
 
 // Doesn't return anything yet; need to decide what we want.
