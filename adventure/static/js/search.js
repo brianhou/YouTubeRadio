@@ -57,7 +57,7 @@ function ytsearch(event) {
                 // construct the div for each search result
                 var html = "<div class=\"result\">" +
                 			"<img class= \"img-rounded\" src=\"{1}\"/>" +
-                			"<div><b><a href=\"/play/{0}\"><span></span>{2}</a></b><br>" +
+                			"<div><b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
                 			"by {3}<br>" +
                 			"{4} | {5} views</div>" +
                 			"<div class=\"clear\"></div></div>";
@@ -72,19 +72,16 @@ function ytsearch(event) {
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
-            $(".result a").click(resultClick);
 
             $("#search").fadeIn();
         });
     }
 }
 
-function resultClick(event) {
-    event.preventDefault();
+function selectVideo(videoID) {
     $("#search").fadeOut();
     $("#intro").fadeOut();
     $("#play").fadeIn();
-    var videoID = this.href.split('/').reverse()[0];
     if (ytplayer) {
         watch(videoID);
     } else {
