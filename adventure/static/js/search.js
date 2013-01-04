@@ -1,10 +1,15 @@
 var suggestCallBack; // global var for autocomplete jsonp
 
 $(document).ready(function () {
+    if(document.location.hash) {
+       $("#search_results").html("");
+       loadYTPlayer(document.location.hash.slice(1));
+    }
     // Initialize search button function
     $("#search_button").click(ytsearch);
     // Initialize "instant" search function
     $("#search_query").keyup(ytsearch);
+    // Initialize search to term from URL
     // Initialize autocomplete for search terms
     $("#search_query").autocomplete({
         source: function(request, response) {
@@ -68,5 +73,6 @@ function ytsearch(event) {
 function resultClick(event) {
     event.preventDefault();
     $("#search_results").html("");
-    loadYTPlayer(this.href.split('/').reverse()[0]);
+    var videoID = this.href.split('/').reverse()[0];
+    loadYTPlayer(videoID);
 }

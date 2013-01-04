@@ -33,6 +33,7 @@ var oldRelated = [];
 function watch(videoID) {
     if (ytplayer) {
         currentVideo = videoID;
+        document.location.hash = videoID;
         watchHistory.push(videoID);
         ytplayer.loadVideoById(videoID);
 
