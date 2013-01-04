@@ -1,3 +1,5 @@
+var ytplayer;
+
 function loadYTPlayer(videoID) {
     nextVideo = videoID;
     var params = { allowScriptAccess: "always" };
@@ -6,8 +8,6 @@ function loadYTPlayer(videoID) {
     swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(videoID),
             "ytplayer", "640", "385", "8", null, null, params, atts);
 }
-
-var ytplayer;
 
 function onYouTubePlayerReady(playerId) {
     ytplayer = document.getElementById("ytplayer");
@@ -34,6 +34,7 @@ function watch(videoID) {
     if (ytplayer) {
         document.location.hash = videoID;
         watchHistory.push(videoID);
+        $("#shareLink").val(document.location.href);
         ytplayer.loadVideoById(videoID);
 
         var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);

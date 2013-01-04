@@ -36,6 +36,10 @@ $(document).ready(function () {
             };
         },
     });
+
+    $("#shareLink").click(function() {
+        this.select();
+    });
 });
 
 var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ'
