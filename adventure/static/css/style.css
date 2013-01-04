@@ -1,16 +1,10 @@
 body {
-  text-align: center;
-  background: url(images/cream_dust.png); }
+  margin-left: auto;
+  margin-right: auto;
+  background: url(../img/cream_dust.png); }
 
-.center {
-  margin: 0 auto; }
-
-/* tr { */
-/*     border-radius: 10px; */
-/* } */
-#search_bar {
-  display: inline-block;
-  border: 1px solid; }
+#header {
+  text-align: center; }
 
 #content {
   text-align: left;
@@ -35,16 +29,18 @@ body {
     #search_results .result:hover {
       background-color: lightgrey;
       border-color: black; }
-    #search_results .result span {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      /* In case any other links are present */
-      z-index: 1;
-      /* IE Hack */
-      background-image: url("images/empty.gif"); }
+    #search_results .result a {
+      text-decoration: none; }
+      #search_results .result a span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        /* In case any other links are present */
+        z-index: 1;
+        /* IE Hack */
+        background-image: url("../img/empty.gif"); }
   #search_results img {
     float: left;
     margin-right: 15px;
@@ -52,7 +48,7 @@ body {
 
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {
-  background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat; }
+  background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat; }
 
 object#ytplayer {
   margin: 0 auto;

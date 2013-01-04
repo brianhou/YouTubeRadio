@@ -1,21 +1,11 @@
 body {
+    margin-left: auto;
+    margin-right: auto;
+    background: url(../img/cream_dust.png)
+}
+#header {
     text-align: center;
-    background: url(images/cream_dust.png)
 }
-
-.center {
-    margin: 0 auto;
-}
-
-/* tr { */
-/*     border-radius: 10px; */
-/* } */
-
-#search_bar {
-    display: inline-block;
-    border: 1px solid;
-}
-
 #content {
     text-align: left;
     padding: 10px;
@@ -26,7 +16,7 @@ body {
     padding: 10px 0;
     margin: auto;
     max-width: 55%;
-    
+
     .clear {
         clear: both;
     }
@@ -50,24 +40,26 @@ body {
 
         &:hover{
             background-color: lightgrey;
-            border: {
-                color: black;
-            }
+            border-color: black;
         }
 
-        span {
-            position:absolute; 
-            width:100%;
-            height:100%;
-            top:0;
-            left: 0;
-            /* In case any other links are present */
-            z-index: 1;
-            /* IE Hack */
-            background-image: url('images/empty.gif');
-        }   
+        a {
+            text-decoration: none;
+
+            span {
+                position:absolute;
+                width:100%;
+                height:100%;
+                top:0;
+                left: 0;
+                /* In case any other links are present */
+                z-index: 1;
+                /* IE Hack */
+                background-image: url('../img/empty.gif');
+            }
+        }
     }
-    
+
     img {
         float: left;
         margin-right: 15px;
@@ -77,7 +69,7 @@ body {
 
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {
-    background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
+    background: white url('../img/ui-anim_basic_16x16.gif') right center no-repeat;
 }
 
 object#ytplayer {
@@ -88,4 +80,4 @@ object#ytplayer {
 div#ytplayer {
     display: none;
 }
-    
+
