@@ -1,27 +1,27 @@
 function loadYTPlayer(videoID) {
-    currentVideo = videoID;
+    nextVideo = videoID;
     var params = { allowScriptAccess: "always" };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
     swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(videoID),
-        "ytplayer", "425", "356", "8", null, null, params, atts);
+            "ytplayer", "640", "385", "8", null, null, params, atts);
 }
 
 var ytplayer;
 
 function onYouTubePlayerReady(playerId) {
-  ytplayer = document.getElementById("ytplayer");
-  ytplayer.addEventListener("onStateChange", "playerStateChangeListener");
-  watch(currentVideo);
+    ytplayer = document.getElementById("ytplayer");
+    ytplayer.addEventListener("onStateChange", "playerStateChangeListener");
+    watch(nextVideo);
 }
 
 function playerStateChangeListener(event) {
     if(event == 0) {
-        watch(related[Math.floor(Math.random() * related.length)]);
+        watch(nextVideo);
     }
 }
 
-var currentVideo;
+var nextVideo;
 var watchHistory = [];
 var related = [];
 var oldRelated = [];
@@ -32,13 +32,12 @@ var oldRelated = [];
 
 function watch(videoID) {
     if (ytplayer) {
-        currentVideo = videoID;
         document.location.hash = videoID;
         watchHistory.push(videoID);
         ytplayer.loadVideoById(videoID);
 
-        var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID)
-        oldRelated.push(related) // append the previous related list to the oldRelated list
+        var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
+        oldRelated.push(related); // append the previous related list to the oldRelated list
         getRelated(relatedURL);
     }
 }
@@ -63,5 +62,6 @@ function getRelated(relatedVideosURL) {
             // val.yt$statistics.viewCount
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
+        nextVideo = related[Math.floor(Math.random() * related.length)];
     });
 }

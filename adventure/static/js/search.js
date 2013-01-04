@@ -1,15 +1,19 @@
 var suggestCallBack; // global var for autocomplete jsonp
 
 $(document).ready(function () {
+    // If there's already a video id in the url, play that
     if(document.location.hash) {
-       $("#search_results").html("");
+       $("#play").fadeIn();
        loadYTPlayer(document.location.hash.slice(1));
+    } else {
+        $("#intro").fadeIn();
+        $("#search").show();
     }
-    // Initialize search button function
+
+    // Initialize button and "instant" function
     $("#search_button").click(ytsearch);
-    // Initialize "instant" search function
     $("#search_query").keyup(ytsearch);
-    // Initialize search to term from URL
+
     // Initialize autocomplete for search terms
     $("#search_query").autocomplete({
         source: function(request, response) {
@@ -40,12 +44,17 @@ function ytsearch(event) {
     event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
-        $("#ytplayer").hide();
+        $("#play").fadeOut();
+        $("#intro").fadeIn();
+
+        // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
         var data = {"q":query, "alt":"json", "max-results":"5", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
         $.getJSON(url, data, function (data) {
+            // holds formatted search results
             var items = [];
             $.each(data.feed.entry, function (key, val) {
+                // construct the div for each search result
                 var html = "<div class=\"result\">" +
                 			"<img class= \"img-rounded\" src=\"{1}\"/>" +
                 			"<div><b><a href=\"/play/{0}\"><span></span>{2}</a></b><br>" +
@@ -61,18 +70,25 @@ function ytsearch(event) {
 						    numAddCommas(val.yt$statistics.viewCount))
             	);
             });
+            // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
             $(".result a").click(resultClick);
+
+            $("#search").fadeIn();
         });
-    }
-    else {
-        $("#search_results").html("");
     }
 }
 
 function resultClick(event) {
     event.preventDefault();
-    $("#search_results").html("");
+    $("#search").fadeOut();
+    $("#intro").fadeOut();
+    $("#play").fadeIn();
     var videoID = this.href.split('/').reverse()[0];
-    loadYTPlayer(videoID);
+    if (ytplayer) {
+        watch(videoID);
+    } else {
+        loadYTPlayer(videoID);
+    }
+
 }

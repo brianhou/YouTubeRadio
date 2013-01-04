@@ -6,64 +6,61 @@ body {
 #header {
     text-align: center;
 }
-#content {
-    padding: 10px;
-    margin: 50px auto;
+
+#intro p {
+    text-align: center;
+}
+
+#intro, #search, #play {
+    display: none;
 }
 
 .clear {
     clear: both;
 }
 
-#search_results {
-    padding: 10px 0;
-    margin: auto;
-    max-width: 55%;
+.result {
+    position: relative;
+    padding: 10px;
+    margin: 10px;
 
-    
-    .result {
-        position: relative;
-        padding: 10px;
-        margin: 10px;
-
-        border: {
-            width: 1px;
-            color: transparent;
-            style: solid;
-            left: {
-                width: 0px;
-            }
-            right: {
-                width: 0px;
-            }
+    border: {
+        width: 1px;
+        color: transparent;
+        style: solid;
+        left: {
+            width: 0px;
         }
-
-        &:hover{
-            background-color: lightgrey;
-            border-color: black;
-        }
-
-        a {
-            text-decoration: none;
-
-            span {
-                position:absolute;
-                width:100%;
-                height:100%;
-                top:0;
-                left: 0;
-                /* In case any other links are present */
-                z-index: 1;
-                /* IE Hack */
-                background-image: url('../img/empty.gif');
-            }
+        right: {
+            width: 0px;
         }
     }
 
-    img {
-        float: left;
-        margin-right: 15px;
+    &:hover{
+        background-color: lightgrey;
+        border-color: black;
     }
+
+    a {
+        text-decoration: none;
+
+        span {
+            position:absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left: 0;
+            /* In case any other links are present */
+            z-index: 1;
+            /* IE Hack */
+            background-image: url('../img/empty.gif');
+        }
+    }
+}
+
+#search_results img {
+    float: left;
+    margin-right: 15px;
 }
 
 /* JQuery UI autocomplete customization */

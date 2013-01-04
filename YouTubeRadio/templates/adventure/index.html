@@ -1,5 +1,13 @@
 {% extends "adventure/base.html" %}
 {% block content %}
-    <div class="center" id="search_results"></div>
-    <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
+    <div id="intro" class="row-fluid">
+        <p class="span4 offset4 lead">This is YouTube Adventure.<br>Select a starting video to begin your adventure.</p>
+    </div>
+    <div id="search" class="row-fluid">
+        <div id="search_results" class="span6 offset3">
+        </div>
+    </div>
+    <div id="play" class="row-fluid">
+        <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
+    </div>
 {% endblock %}
