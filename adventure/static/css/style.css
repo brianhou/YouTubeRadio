@@ -7,16 +7,16 @@ body {
   text-align: center; }
 
 #content {
-  text-align: left;
   padding: 10px;
   margin: 50px auto; }
+
+.clear {
+  clear: both; }
 
 #search_results {
   padding: 10px 0;
   margin: auto;
   max-width: 55%; }
-  #search_results .clear {
-    clear: both; }
   #search_results .result {
     position: relative;
     padding: 10px;
@@ -43,8 +43,7 @@ body {
         background-image: url("../img/empty.gif"); }
   #search_results img {
     float: left;
-    margin-right: 15px;
-    border-radius: 10px; }
+    margin-right: 15px; }
 
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {

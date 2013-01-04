@@ -42,7 +42,7 @@ function ytsearch(event) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
                 var html = "<div class=\"result\">" +
-                			"<img src=\"{1}\"/>" +
+                			"<img class= \"img-rounded\" src=\"{1}\"/>" +
                 			"<div><b><a href=\"/play/{0}\"><span></span>{2}</a></b><br>" +
                 			"by {3}<br>" +
                 			"{4} | {5} views</div>" +

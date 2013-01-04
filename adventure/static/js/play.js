@@ -30,7 +30,6 @@ var oldRelated = [];
 // Check that new video IDs are not in watchHistory
 // A naive way to fix the second would be to check for different titles; not sure how much we can go beyond that.
 
-// Placeholder
 function watch(videoID) {
     if (ytplayer) {
         currentVideo = videoID;

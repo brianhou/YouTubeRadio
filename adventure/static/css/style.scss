@@ -7,9 +7,12 @@ body {
     text-align: center;
 }
 #content {
-    text-align: left;
     padding: 10px;
     margin: 50px auto;
+}
+
+.clear {
+    clear: both;
 }
 
 #search_results {
@@ -17,10 +20,7 @@ body {
     margin: auto;
     max-width: 55%;
 
-    .clear {
-        clear: both;
-    }
-
+    
     .result {
         position: relative;
         padding: 10px;
@@ -63,7 +63,6 @@ body {
     img {
         float: left;
         margin-right: 15px;
-        border-radius: 10px;
     }
 }
 
