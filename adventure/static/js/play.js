@@ -1,5 +1,4 @@
-var ytplayer;
-
+var ytplayer; 
 function loadYTPlayer(videoID) {
     nextVideo = videoID;
     var params = { allowScriptAccess: "always" };
@@ -16,7 +15,7 @@ function onYouTubePlayerReady(playerId) {
 }
 
 function playerStateChangeListener(event) {
-    if(event == 0) {
+    if(event === 0) {
         watch(nextVideo);
     }
 }
@@ -43,7 +42,6 @@ function watch(videoID) {
     }
 }
 
-// Doesn't return anything yet; need to decide what we want.
 function getRelated(relatedVideosURL) {
     related.length = 0;
     var data = {"alt":"json", "v":"2", "key":DEVKEY, "format":"5"};
@@ -63,6 +61,6 @@ function getRelated(relatedVideosURL) {
             // val.yt$statistics.viewCount
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
-        nextVideo = related[Math.floor(Math.random() * related.length)];
+        nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
     });
 }

@@ -1,10 +1,11 @@
 var suggestCallBack; // global var for autocomplete jsonp
 
 $(document).ready(function () {
+
     // If there's already a video id in the url, play that
     if(document.location.hash) {
-       $("#play").fadeIn();
-       loadYTPlayer(document.location.hash.slice(1));
+        $("#play").fadeIn();
+        loadYTPlayer(document.location.hash.slice(1));
     } else {
         $("#intro").fadeIn();
         $("#search").show();
@@ -24,8 +25,7 @@ $(document).ready(function () {
                   "jsonp":"suggestCallBack", // jsonp callback function name
                   "q":request.term, // query term
                   "client":"youtube" // force youtube style response, ie json
-                }
-            );
+                });
             suggestCallBack = function (data) {
                 var suggestions = [];
                 $.each(data[1], function(key, val) {
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 suggestions.length = 5;
                 response(suggestions);
             };
-        },
+        }
     });
 
     $("#shareLink").click(function() {
@@ -42,7 +42,8 @@ $(document).ready(function () {
     });
 });
 
-var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ'
+
+var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ';
 
 function ytsearch(event) {
     event.preventDefault();
@@ -60,19 +61,18 @@ function ytsearch(event) {
             $.each(data.feed.entry, function (key, val) {
                 // construct the div for each search result
                 var html = "<div class=\"result\">" +
-                			"<img class= \"img-rounded\" src=\"{1}\"/>" +
-                			"<div><b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
-                			"by {3}<br>" +
-                			"{4} | {5} views</div>" +
-                			"<div class=\"clear\"></div></div>";
-            	items.push(html.format(
-						    val.media$group.yt$videoid.$t,
-						    val.media$group.media$thumbnail[1].url,
-						    val.title.$t,
-						    val.author[0].name.$t,
-						    secondsToHMS(val.media$group.yt$duration.seconds),
-						    numAddCommas(val.yt$statistics.viewCount))
-            	);
+                            "<img class= \"img-rounded\" src=\"{1}\"/>" +
+                            "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+                            "by {3}<br>" +
+                            "{4} | {5} views" +
+                            "<div class=\"clear\"></div></div>";
+                items.push(html.format(
+                            val.media$group.yt$videoid.$t,
+                            val.media$group.media$thumbnail[1].url,
+                            val.title.$t,
+                            val.author[0].name.$t,
+                            secondsToHMS(val.media$group.yt$duration.seconds),
+                            numAddCommas(val.yt$statistics.viewCount)));
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
