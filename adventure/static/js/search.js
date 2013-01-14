@@ -19,7 +19,7 @@ $(document).ready(function () {
     $("#search_query").autocomplete({
         source: function(request, response) {
             $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
-                { 
+                {
                   "hl":"en", // Language
                   "ds":"yt", // Restrict lookup to youtube
                   "jsonp":"suggestCallBack", // jsonp callback function name

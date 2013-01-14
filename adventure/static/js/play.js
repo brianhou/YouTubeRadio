@@ -1,4 +1,4 @@
-var ytplayer; 
+var ytplayer;
 function loadYTPlayer(videoID) {
     nextVideo = videoID;
     var params = { allowScriptAccess: "always" };
