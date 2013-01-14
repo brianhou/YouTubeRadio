@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>YouTube Adventure{% block title %}{% endblock %}</title>
+        <title>YouTube Adventure</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
@@ -23,7 +23,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div id="header"> 
+            <div id="header" class="inlineCenter"> 
                 <a href="/" ><img src="{% static "img/logo.png" %}" alt="YouTube Radio!"/></a>
                 <form class="form-search" method="get" action="#">
                     <input type="text" class="input-xlarge search-query" autofocus id="search_query" name="search" placeholder="What are you looking for?">

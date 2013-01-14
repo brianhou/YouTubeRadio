@@ -3,13 +3,6 @@ body {
     margin-right: auto;
     background: url(../img/cream_dust.png)
 }
-#header {
-    text-align: center;
-}
-
-#intro p {
-    text-align: center;
-}
 
 #intro, #search, #play {
     display: none;
@@ -58,9 +51,24 @@ body {
     }
 }
 
-#search_results img {
+.left {
     float: left;
     margin-right: 15px;
+}
+
+.right {
+    float: right;
+    margin-left: 15px;
+}
+.hide {
+    visibility: none;
+}
+.inlineCenter {
+    text-align: center;
+}
+.blockCenter {
+    margin-right: auto;
+    margin-right: auto;
 }
 
 /* JQuery UI autocomplete customization */

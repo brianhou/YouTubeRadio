@@ -61,7 +61,7 @@ function ytsearch(event) {
             $.each(data.feed.entry, function (key, val) {
                 // construct the div for each search result
                 var html = "<div class=\"result\">" +
-                            "<img class= \"img-rounded\" src=\"{1}\"/>" +
+                            "<img class= \"img-rounded left\" src=\"{1}\"/>" +
                             "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
                             "by {3}<br>" +
                             "{4} | {5} views" +
