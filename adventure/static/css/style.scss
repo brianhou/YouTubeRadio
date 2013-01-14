@@ -70,13 +70,20 @@ body {
     margin-right: auto;
     margin-right: auto;
 }
+.box {
+    border: solid black 1px;
+}
 
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {
     background: white url('../img/ui-anim_basic_16x16.gif') right center no-repeat;
 }
 
-#ytplayer, #videoInfo{
+#ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox{
     padding-bottom: 25px;
+}
+
+#nextVidBox img {
+    width: 45%;
 }
 

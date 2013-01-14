@@ -74,13 +74,13 @@ function ytsearch(event) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
                 var videoID = val.media$group.yt$videoid.$t;
-                var vid = { "id" : val.media$group.yt$videoid.$t,
+                var video = { "id" : val.media$group.yt$videoid.$t,
                             "thumbnail" : val.media$group.media$thumbnail[1].url,
                             "title" : val.title.$t,
                             "uploader" : val.author[0].name.$t,
                             "length" : secondsToHMS(val.media$group.yt$duration.seconds),
                             "views" : numAddCommas(val.yt$statistics.viewCount)};
-                searchResults[videoID] = vid;
+                searchResults[videoID] = video;
                 // construct the div for each search result
                 var html = "<div class=\"result\">" +
                             "<img class= \"img-rounded left\" src=\"{1}\"/>" +
@@ -90,11 +90,11 @@ function ytsearch(event) {
                             "<div class=\"clear\"></div></div>";
                 items.push(html.format(
                             videoID,
-                            vid["thumbnail"],
-                            vid["title"],
-                            vid["uploader"],
-                            vid["length"],
-                            vid["views"]));
+                            video["thumbnail"],
+                            video["title"],
+                            video["uploader"],
+                            video["length"],
+                            video["views"]));
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
@@ -188,6 +188,16 @@ function getRelated(videoID) {
         //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
         nextVideo = related.splice(0, 1)[0];
+        var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
+                    "<p><b>{1}</b><br>" +
+                    "by {2}<br>" +
+                    "{3} | {4} views</p>" +
+                    "<div class=\"clear\"></div>";
+        $("#upNext").html(html.format(nextVideo["thumbnail"],
+                                      nextVideo["title"],
+                                      nextVideo["uploader"],
+                                      nextVideo["length"],
+                                      nextVideo["views"]));
     });
 }
 

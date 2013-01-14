@@ -8,12 +8,17 @@
         </div>
     </div>
     <div id="play" class="row-fluid">
-        <div id="sidebar" class="span4">
-            <div id="nextVid"></div>
-            <div id="share"><span class="lead">Share this video:</span><br><input id="shareLink" type="text"></input></div>
-            <div id="history"></div>
+        <div id="sidebar" class="span3">
+            <div id="nextVidBox" class="well">
+                <p class="lead">Up Next:</p>
+                <div id="upNext"></div>
+                <button class="btn btn-success" type="button" onclick="javascript:watch(nextVideo);"><i class="icon-thumbs-up icon-white"></i> Skip to It!</button>
+                <button class="btn btn-danger" type="button"><i class="icon-thumbs-down icon-white"></i> Fuck It!</button>
+            </div>
+            <div id="shareBox" class="well"><span class="lead">Share this video:</span><br><input id="shareLink" type="text"></input></div>
+            <div id="historyBox"></div>
         </div>
-        <div class="span8">
+        <div class="offset1 span8">
             <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
             <div id="videoInfo"></div>
         </div>
