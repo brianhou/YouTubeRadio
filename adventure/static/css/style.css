@@ -64,3 +64,6 @@ body {
 
 #nextVidBox img {
   width: 45%; }
+
+#nextVidBox {
+  min-height: 150px; }

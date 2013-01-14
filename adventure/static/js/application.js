@@ -184,21 +184,29 @@ function getRelated(videoID) {
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
 
+        selectNextVideo();
+    });
+}
+
+function selectNextVideo() {
+    if (related.length > 1) {
         // Select the next video
         //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
         nextVideo = related.splice(0, 1)[0];
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
-                    "<p><b>{1}</b><br>" +
-                    "by {2}<br>" +
-                    "{3} | {4} views</p>" +
-                    "<div class=\"clear\"></div>";
+                   "<p><b>{1}</b><br>" +
+                   "by {2}<br>" +
+                   "{3} | {4} views</p>" +
+                   "<div class=\"clear\"></div>";
         $("#upNext").html(html.format(nextVideo["thumbnail"],
                                       nextVideo["title"],
                                       nextVideo["uploader"],
                                       nextVideo["length"],
                                       nextVideo["views"]));
-    });
+    } else {
+       alert("Oops! We ran out of suggested videos. Stick with the current one, or pick a new one to continue your adventure.");
+    }
 }
 
 /* Utility Functions */
