@@ -45,6 +45,8 @@ $(document).ready(function () {
 
 var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ';
 
+var searchResults = {};
+
 function ytsearch(event) {
     event.preventDefault();
     var query = $("#search_query").val();
@@ -60,6 +62,14 @@ function ytsearch(event) {
             // holds formatted search results
             var items = [];
             $.each(data.feed.entry, function (key, val) {
+                var videoID = val.media$group.yt$videoid.$t;
+                var vid = { "id" : val.media$group.yt$videoid.$t,
+                            "thumbnail" : val.media$group.media$thumbnail[1].url,
+                            "title" : val.title.$t,
+                            "uploader" : val.author[0].name.$t,
+                            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                            "views" : numAddCommas(val.yt$statistics.viewCount)};
+                searchResults[videoID] = vid;
                 // construct the div for each search result
                 var html = "<div class=\"result\">" +
                             "<img class= \"img-rounded left\" src=\"{1}\"/>" +
@@ -68,12 +78,12 @@ function ytsearch(event) {
                             "{4} | {5} views" +
                             "<div class=\"clear\"></div></div>";
                 items.push(html.format(
-                            val.media$group.yt$videoid.$t,
-                            val.media$group.media$thumbnail[1].url,
-                            val.title.$t,
-                            val.author[0].name.$t,
-                            secondsToHMS(val.media$group.yt$duration.seconds),
-                            numAddCommas(val.yt$statistics.viewCount)));
+                            videoID,
+                            vid["thumbnail"],
+                            vid["title"],
+                            vid["uploader"],
+                            vid["length"],
+                            vid["views"]));
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
@@ -87,7 +97,7 @@ function selectVideo(videoID) {
     $("#search").fadeOut();
     $("#intro").fadeOut();
     $("#play").show();
-    loadYTPlayer(videoID);
+    loadYTPlayer(searchResults[videoID]);
 }
 
 var ytplayer;
@@ -96,12 +106,12 @@ var watchHistory = [];
 var related = [];
 var oldRelated = [];
 
-function loadYTPlayer(videoID) {
-    nextVideo = videoID;
+function loadYTPlayer(video) {
+    nextVideo = video;
     var params = { allowScriptAccess: "always" };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
-    swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(videoID),
+    swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
             "ytplayer", "640", "385", "8", null, null, params, atts);
 }
 
@@ -121,17 +131,17 @@ function playerStateChangeListener(event) {
 // Check that new video IDs are not in watchHistory
 // A naive way to fix the second would be to check for different titles; not sure how much we can go beyond that.
 
-function watch(videoID) {
+function watch(video) {
     // Set the hash and share url
-    document.location.hash = videoID;
-    watchHistory.push(videoID);
+    document.location.hash = video["id"];
+    watchHistory.push(video);
     $("#shareLink").val(document.location.href);
 
     // Load (and play) the video
-    ytplayer.loadVideoById(videoID);
+    ytplayer.loadVideoById(video["id"]);
 
     // Setup for the next video
-    getRelated(videoID);
+    getRelated(video["id"]);
 }
 
 function getRelated(videoID) {
@@ -147,7 +157,13 @@ function getRelated(videoID) {
         $.each(data.feed.entry, function (key, val) {
             var id = val.media$group.yt$videoid.$t;
             if (!(id in watchHistory)) {
-                related.push(id);
+                var vid = { "id" : id,
+                            "thumbnail" : val.media$group.media$thumbnail[1].url,
+                            "title" : val.title.$t,
+                            "uploader" : val.author[0].name.$t,
+                            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                            "views" : numAddCommas(val.yt$statistics.viewCount)};
+                related.push(vid);
             }
             // val.author[0].name.$t is the uploader
             // val.gd$rating.average is the score from 1 to 5
