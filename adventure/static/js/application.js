@@ -5,7 +5,18 @@ $(document).ready(function () {
     // If there's already a video id in the url, play that
     if(document.location.hash) {
         $("#play").show();
-        loadYTPlayer(document.location.hash.slice(1));
+        var videoID = document.location.hash.slice(1);
+        var url = "https://gdata.youtube.com/feeds/api/videos/{0}".format(videoID);
+        var data = {"alt":"json", "v":"2", "key":DEVKEY};
+        $.getJSON(url, data, function (data) {
+            var vid = { "id" : data.entry.media$group.yt$videoid.$t,
+                        "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
+                        "title" : data.entry.title.$t,
+                        "uploader" : data.entry.author[0].name.$t,
+                        "length" : secondsToHMS(data.entry.media$group.yt$duration.seconds),
+                        "views" : numAddCommas(data.entry.yt$statistics.viewCount)};
+            loadYTPlayer(vid);
+        });
     } else {
         $("#intro").fadeIn();
         $("#search").show();
@@ -136,6 +147,9 @@ function watch(video) {
     document.location.hash = video["id"];
     watchHistory.push(video);
     $("#shareLink").val(document.location.href);
+
+    var html = "<b>{0}</b><br>by {1}<br>{2} | {3} views";
+    $("#videoInfo").html(html.format(video["title"], video["uploader"], video["length"], video["views"]));
 
     // Load (and play) the video
     ytplayer.loadVideoById(video["id"]);
