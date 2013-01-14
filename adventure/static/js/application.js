@@ -169,14 +169,13 @@ function getRelated(videoID) {
     var data = {"alt":"json", "v":"2", "key":DEVKEY, "format":"5"};
     $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
-            var id = val.media$group.yt$videoid.$t;
-            if (!(id in watchHistory)) {
-                var vid = { "id" : id,
-                            "thumbnail" : val.media$group.media$thumbnail[1].url,
-                            "title" : val.title.$t,
-                            "uploader" : val.author[0].name.$t,
-                            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-                            "views" : numAddCommas(val.yt$statistics.viewCount)};
+            var vid = { "id" : val.media$group.yt$videoid.$t,
+                        "thumbnail" : val.media$group.media$thumbnail[1].url,
+                        "title" : val.title.$t,
+                        "uploader" : val.author[0].name.$t,
+                        "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                        "views" : numAddCommas(val.yt$statistics.viewCount)};
+            if (!(vid in watchHistory)) {
                 related.push(vid);
             }
             // val.gd$rating.average is the score from 1 to 5
