@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     // If there's already a video id in the url, play that
     if(document.location.hash) {
-        $("#play").fadeIn();
+        $("#play").show();
         loadYTPlayer(document.location.hash.slice(1));
     } else {
         $("#intro").fadeIn();
@@ -49,6 +49,7 @@ function ytsearch(event) {
     event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
+        // Make sure player is hidden away.
         $("#play").fadeOut();
         $("#intro").fadeIn();
 
@@ -85,16 +86,17 @@ function ytsearch(event) {
 function selectVideo(videoID) {
     $("#search").fadeOut();
     $("#intro").fadeOut();
-    $("#play").fadeIn();
-    if (ytplayer) {
-        watch(videoID);
-    } else {
-        loadYTPlayer(videoID);
-    }
+    $("#play").show();
+    loadYTPlayer(videoID);
 
 }
 
 var ytplayer;
+var nextVideo;
+var watchHistory = [];
+var related = [];
+var oldRelated = [];
+
 function loadYTPlayer(videoID) {
     nextVideo = videoID;
     var params = { allowScriptAccess: "always" };
@@ -116,32 +118,33 @@ function playerStateChangeListener(event) {
     }
 }
 
-var nextVideo;
-var watchHistory = [];
-var related = [];
-var oldRelated = [];
-
 // Eventually should reduce stupid suggestions (like exact same video, duplicate music videos, and...?)
 // Check that new video IDs are not in watchHistory
 // A naive way to fix the second would be to check for different titles; not sure how much we can go beyond that.
 
 function watch(videoID) {
-    if (ytplayer) {
-        document.location.hash = videoID;
-        watchHistory.push(videoID);
-        $("#shareLink").val(document.location.href);
-        ytplayer.loadVideoById(videoID);
+    // Set the hash and share url
+    document.location.hash = videoID;
+    watchHistory.push(videoID);
+    $("#shareLink").val(document.location.href);
 
-        var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
-        oldRelated.push(related); // append the previous related list to the oldRelated list
-        getRelated(relatedURL);
-    }
+    // Load (and play) the video
+    ytplayer.loadVideoById(videoID);
+
+    // Setup for the next video
+    getRelated(videoID);
 }
 
-function getRelated(relatedVideosURL) {
+function getRelated(videoID) {
+    var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
+    oldRelated.push.apply(oldRelated, related); // append the previous related list to the oldRelated list
+
+    // Clear the related list
     related.length = 0;
+
+    // Get the related video stream
     var data = {"alt":"json", "v":"2", "key":DEVKEY, "format":"5"};
-    $.getJSON(relatedVideosURL, data, function (data) {
+    $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
             var id = val.media$group.yt$videoid.$t;
             if (!(id in watchHistory)) {
@@ -157,6 +160,7 @@ function getRelated(relatedVideosURL) {
             // val.yt$statistics.viewCount
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
+        // Select the next video
         nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
     });
 }
