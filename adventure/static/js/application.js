@@ -170,9 +170,10 @@ function getRelated(videoID) {
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
 
-        // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
         // Select the next video
-        nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
+        //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
+        // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
+        nextVideo = related.splice(0, 1)[0];
     });
 }
 
