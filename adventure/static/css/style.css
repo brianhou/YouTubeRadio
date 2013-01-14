@@ -55,3 +55,6 @@ body {
 /* JQuery UI autocomplete customization */
 .ui-autocomplete-loading {
   background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat; }
+
+#ytplayer, #videoInfo {
+  padding-bottom: 25px; }

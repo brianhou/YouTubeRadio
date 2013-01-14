@@ -196,8 +196,8 @@ function getRelated(videoID) {
 String.prototype.format = function() {
     var formatted = this;
     for (var i=0; i < arguments.length; i++) {
-    	var regexp = new RegExp('\\{'+i+'\\}', 'g');
-    	formatted = formatted.replace(regexp, arguments[i]);
+        var regexp = new RegExp('\\{'+i+'\\}', 'g');
+        formatted = formatted.replace(regexp, arguments[i]);
     }
     return formatted;
 };
