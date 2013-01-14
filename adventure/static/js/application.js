@@ -165,14 +165,8 @@ function getRelated(videoID) {
                             "views" : numAddCommas(val.yt$statistics.viewCount)};
                 related.push(vid);
             }
-            // val.author[0].name.$t is the uploader
             // val.gd$rating.average is the score from 1 to 5
             // val.link[2].href is the related videos feed of the related video (Yes, this is different from the related videos feed of the original video)
-            // val.media$group.media$thumbnail[1].url is the thumbnail
-            // val.media$group.yt$duration
-            // val.media$group.yt$videoid
-            // val.title.$t
-            // val.yt$statistics.viewCount
             // val.yt$rating.numDislikes and val.yt$rating.numLikes
         });
 
