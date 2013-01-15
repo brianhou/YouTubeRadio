@@ -62,8 +62,5 @@ body {
 #ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox {
   padding-bottom: 25px; }
 
-#nextVidBox img {
-  width: 45%; }
-
-#nextVidBox {
-  min-height: 150px; }
+#shareLink {
+  max-width: 100%; }
