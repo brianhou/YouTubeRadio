@@ -74,7 +74,7 @@ function ytsearch(event) {
             var items = [];
             $.each(data.feed.entry, function (key, val) {
                 var videoID = val.media$group.yt$videoid.$t;
-                var video = { "id" : val.media$group.yt$videoid.$t,
+                var video = { "id" : videoID,
                             "thumbnail" : val.media$group.media$thumbnail[1].url,
                             "title" : val.title.$t,
                             "uploader" : val.author[0].name.$t,
@@ -113,7 +113,7 @@ function selectVideo(videoID) {
 
 var ytplayer;
 var nextVideo;
-var watchHistory = [];
+var watchHistory = {};
 var related = [];
 var oldRelated = [];
 
@@ -145,7 +145,7 @@ function playerStateChangeListener(event) {
 function watch(video) {
     // Set the hash and share url
     document.location.hash = video["id"];
-    watchHistory.push(video);
+    watchHistory[video["id"]] = video;
     $("#shareLink").val(document.location.href);
 
     var html = "<b>{0}</b><br>by {1}<br>{2} | {3} views";
@@ -169,14 +169,14 @@ function getRelated(videoID) {
     var data = {"alt":"json", "v":"2", "key":DEVKEY, "format":"5"};
     $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
-            var vid = { "id" : val.media$group.yt$videoid.$t,
+            var video = { "id" : val.media$group.yt$videoid.$t,
                         "thumbnail" : val.media$group.media$thumbnail[1].url,
                         "title" : val.title.$t,
                         "uploader" : val.author[0].name.$t,
                         "length" : secondsToHMS(val.media$group.yt$duration.seconds),
                         "views" : numAddCommas(val.yt$statistics.viewCount)};
-            if (!(vid in watchHistory)) {
-                related.push(vid);
+            if (watchHistory[video["id"]] === undefined) {
+                related.push(video);
             }
             // val.gd$rating.average is the score from 1 to 5
             // val.link[2].href is the related videos feed of the related video (Yes, this is different from the related videos feed of the original video)
