@@ -70,7 +70,6 @@ body {
   overflow-x: visible; }
 
 #watchHistory {
-  width: 100%;
   overflow-x: scroll; }
 
 #shareLink {
