@@ -34,6 +34,10 @@ body {
       /* IE Hack */
       background-image: url("../img/empty.gif"); }
 
+.history {
+  width: 200px;
+  display: table-cell; }
+
 .left {
   float: left;
   margin-right: 15px; }
@@ -61,6 +65,13 @@ body {
 
 #ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox {
   padding-bottom: 25px; }
+
+#historyBox {
+  overflow-x: visible; }
+
+#watchHistory {
+  width: 100%;
+  overflow-x: scroll; }
 
 #shareLink {
   max-width: 100%; }

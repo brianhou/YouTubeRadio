@@ -160,7 +160,7 @@ function watch(video) {
 
 function updateHistory(video) {
     watchHistory.push(video);
-    var html = "<div class=\"result\">" +
+    var html = "<div class=\"result history\">" +
                 "<img class= \"img-rounded left\" src=\"{1}\"/>" +
                 "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
                 "by {3}<br>" +
