@@ -3,7 +3,7 @@ body {
   margin-right: auto;
   background: url(../img/cream_dust.png); }
 
-#intro, #search, #play {
+#intro, #search, #play, #historyBar {
   display: none; }
 
 .clear {

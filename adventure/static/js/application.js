@@ -159,6 +159,9 @@ function watch(video) {
 }
 
 function updateHistory(video) {
+    if (watchHistory) {
+	$("#historyBar").show();
+    }
     watchHistory.push(video);
     var html = "<div class=\"result history\">" +
                 "<img class= \"img-rounded left\" src=\"{1}\"/>" +
