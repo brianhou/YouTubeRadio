@@ -145,7 +145,7 @@ function playerStateChangeListener(event) {
 function watch(video) {
     // Set the hash and share url
     document.location.hash = video["id"];
-    watchHistory.push(video);
+    updateHistory(video);
     $("#shareLink").val(document.location.href);
 
     var html = "<b>{0}</b><br>by {1}<br>{2} | {3} views";
@@ -156,6 +156,22 @@ function watch(video) {
 
     // Setup for the next video
     getRelated(video["id"]);
+}
+
+function updateHistory(video) {
+    watchHistory.push(video);
+    var html = "<div class=\"result\">" +
+                "<img class= \"img-rounded left\" src=\"{1}\"/>" +
+                "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+                "by {3}<br>" +
+                "{4} | {5} views" +
+                "<div class=\"clear\"></div></div>";
+    $("#watchHistory").prepend(html.format(video["id"],
+                                          video["thumbnail"],
+                                          video["title"],
+                                          video["uploader"],
+                                          video["length"],
+                                          video["views"]));
 }
 
 function getRelated(videoID) {
