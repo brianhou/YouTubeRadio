@@ -36,7 +36,7 @@ body {
 
 #historyBox {
   white-space: nowrap;
-  overflow: scroll; }
+  overflow-x: scroll; }
 
 .history {
   width: 15%;
