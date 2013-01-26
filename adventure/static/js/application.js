@@ -113,7 +113,7 @@ function selectVideo(videoID) {
 
 var ytplayer;
 var nextVideo;
-var watchHistory = {};
+var watchHistory = [];
 var related = [];
 var oldRelated = [];
 
@@ -145,7 +145,7 @@ function playerStateChangeListener(event) {
 function watch(video) {
     // Set the hash and share url
     document.location.hash = video["id"];
-    watchHistory[video["id"]] = video;
+    watchHistory.push(video);
     $("#shareLink").val(document.location.href);
 
     var html = "<b>{0}</b><br>by {1}<br>{2} | {3} views";
@@ -175,7 +175,7 @@ function getRelated(videoID) {
                         "uploader" : val.author[0].name.$t,
                         "length" : secondsToHMS(val.media$group.yt$duration.seconds),
                         "views" : numAddCommas(val.yt$statistics.viewCount)};
-            if (watchHistory[video["id"]] === undefined) {
+            if (! haveWatched(video["id"])) {
                 related.push(video);
             }
             // val.gd$rating.average is the score from 1 to 5
@@ -209,6 +209,15 @@ function selectNextVideo() {
 }
 
 /* Utility Functions */
+
+function haveWatched(videoID) {
+    for (var i=0; i < watchHistory.length; i++) {
+        if (watchHistory[i]["id"] == videoID) {
+            return true;
+        }
+    }
+    return false;
+}
 
 String.prototype.format = function() {
     var formatted = this;
