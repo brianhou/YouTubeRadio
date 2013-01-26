@@ -159,16 +159,14 @@ function watch(video) {
 }
 
 function updateHistory(video) {
-    if (watchHistory) {
-	$("#historyBar").show();
-    }
     watchHistory.push(video);
-    var html = "<div class=\"result history\">" +
-                "<img class= \"img-rounded left\" src=\"{1}\"/>" +
-                "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
-                "by {3}<br>" +
-                "{4} | {5} views" +
-                "<div class=\"clear\"></div></div>";
+    var html = "<div class=\"history\">" +
+               "<img class= \"img-rounded\" src=\"{1}\"/>" +
+               "<br><b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+               "by {3}<br>" +
+               "{4} | {5} views</p>" +
+               "<div class=\"clear\"></div></div>";
+
     $("#watchHistory").prepend(html.format(video["id"],
                                           video["thumbnail"],
                                           video["title"],

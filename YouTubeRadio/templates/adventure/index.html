@@ -7,27 +7,27 @@
         <div id="search_results" class="span6 offset3">
         </div>
     </div>
-    <div id="play" class="row-fluid">
-        <div id="sidebar" class="span3">
-            <div id="nextVidBox" class="well">
-                <p class="lead">Up Next:</p>
-                <div id="upNext"></div>
-                <button class="btn btn-success" type="button" onclick="javascript:watch(nextVideo);"><i class="icon-thumbs-up icon-white"></i> Play It!</button>
-                <button class="btn btn-danger" type="button" onclick="javascript:selectNextVideo();"><i class="icon-thumbs-down icon-white"></i> Skip It!</button>
+    <div id="play">
+        <div class="row-fluid">
+            <div id="sidebar" class="span3">
+                <div id="nextVidBox" class="well">
+                    <p class="lead">Up Next:</p>
+                    <div id="upNext"></div>
+                    <button class="btn btn-success" type="button" onclick="javascript:watch(nextVideo);"><i class="icon-thumbs-up icon-white"></i> Play It!</button>
+                    <button class="btn btn-danger" type="button" onclick="javascript:selectNextVideo();"><i class="icon-thumbs-down icon-white"></i> Skip It!</button>
+                </div>
+                <div id="shareBox" class="well"><p class="lead">Share this video:</p><input id="shareLink" type="text"></input></div>
             </div>
-            <div id="shareBox" class="well"><p class="lead">Share this video:</p><input id="shareLink" type="text"></input></div>
+            <div class="offset1 span8">
+                <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
+                <div id="videoInfo"></div>
+            </div>
         </div>
-        <div class="offset1 span8">
-            <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
-            <div id="videoInfo"></div>
+        <div class="row-fluid">
+            <div id="historyBox" class="well span12">
+                <p class="lead">History:</p>
+                <div id="watchHistory"></div>
+            </div>
         </div>
-    </div>
-    <div id="bottomBar" class="row-fluid">
-      <div id="historyBar" class="span12">
-	<div id="historyBox" class="well">
-          <p class="lead">History:</p>
-          <div id="watchHistory"></div>
-	</div>
-      </div>
     </div>
 {% endblock %}

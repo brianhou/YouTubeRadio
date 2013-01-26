@@ -51,6 +51,18 @@ body {
     }
 }
 
+#historyBox {
+    white-space: nowrap;
+    overflow: scroll;
+}
+
+.history {
+    width: 15%;
+    display: inline-block;
+    margin: 15px;
+    white-space: normal;
+}
+
 .left {
     float: left;
     margin-right: 15px;
