@@ -162,7 +162,7 @@ function updateHistory(video) {
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{1}\"/>" +
-               "<br><b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+               "<br><b>{2}</b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
                "<div class=\"clear\"></div></div>";
