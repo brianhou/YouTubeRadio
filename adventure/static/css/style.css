@@ -3,7 +3,7 @@ body {
   margin-right: auto;
   background: url(../img/cream_dust.png); }
 
-#intro, #search, #play, #historyBar {
+#intro, #search, #play {
   display: none; }
 
 .clear {
@@ -34,9 +34,15 @@ body {
       /* IE Hack */
       background-image: url("../img/empty.gif"); }
 
+#historyBox {
+  white-space: nowrap;
+  overflow: scroll; }
+
 .history {
-  width: 200px;
-  display: table-cell; }
+  width: 15%;
+  display: inline-block;
+  margin: 15px;
+  white-space: normal; }
 
 .left {
   float: left;
@@ -65,12 +71,6 @@ body {
 
 #ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox {
   padding-bottom: 25px; }
-
-#historyBox {
-  overflow-x: visible; }
-
-#watchHistory {
-  overflow-x: scroll; }
 
 #shareLink {
   max-width: 100%; }
