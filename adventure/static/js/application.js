@@ -116,6 +116,7 @@ var nextVideo;
 var watchHistory = [];
 var related = [];
 var oldRelated = [];
+var blacklist = [];
 
 function loadYTPlayer(video) {
     nextVideo = video;
@@ -159,6 +160,7 @@ function watch(video) {
 }
 
 function updateHistory(video) {
+    blacklist.push(video["id"]);
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{1}\"/>" +
@@ -192,7 +194,7 @@ function getRelated(videoID) {
                         "uploader" : val.author[0].name.$t,
                         "length" : secondsToHMS(val.media$group.yt$duration.seconds),
                         "views" : numAddCommas(val.yt$statistics.viewCount)};
-            if (! haveWatched(video["id"])) {
+            if (! isBlacklisted(video["id"])) {
                 related.push(video);
             }
             // val.gd$rating.average is the score from 1 to 5
@@ -209,6 +211,7 @@ function selectNextVideo() {
         // Select the next video
         //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
+        blacklist.push(nextVideo["id"]);
         nextVideo = related.splice(0, 1)[0];
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
                    "<p><b>{1}</b><br>" +
@@ -227,9 +230,9 @@ function selectNextVideo() {
 
 /* Utility Functions */
 
-function haveWatched(videoID) {
-    for (var i=0; i < watchHistory.length; i++) {
-        if (watchHistory[i]["id"] == videoID) {
+function isBlacklisted(videoID) {
+    for (var i=0; i < blacklist.length; i++) {
+        if (blacklist[i] == videoID) {
             return true;
         }
     }
