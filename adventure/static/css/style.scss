@@ -78,6 +78,9 @@ body {
 .inlineCenter {
     text-align: center;
 }
+.inlineRight {
+    text-align: right;
+}
 .blockCenter {
     margin-right: auto;
     margin-right: auto;
@@ -97,4 +100,8 @@ body {
 
 #shareLink {
     max-width: 100%;
+}
+
+#footer {
+    font-size: 95%;
 }
