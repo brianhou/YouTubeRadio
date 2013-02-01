@@ -1,7 +1,9 @@
 YouTubeRadio
 ============
 
-A website app that will automatically play YouTube videos from the suggestions list.
+A webapp that automatically plays YouTube videos from the suggestions list.
+
+View it live at [www.ytadventure.com](http://www.ytadventure.com)
 
 Now using Django (1.4.3)!
 
