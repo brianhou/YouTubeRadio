@@ -31,6 +31,11 @@ body {
   margin-right: auto;
   background: url(../img/cream_dust.png); }
 
+#header img {
+  padding: 15px;
+  padding-top: 25px;
+  width: 40%; }
+
 #intro, #search, #play {
   display: none; }
 
