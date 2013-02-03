@@ -72,18 +72,6 @@ body {
     padding: 10px;
     margin: 10px;
 
-    border: {
-        width: 1px;
-        color: transparent;
-        style: solid;
-        left: {
-            width: 0px;
-        }
-        right: {
-            width: 0px;
-        }
-    }
-
     &:hover{
         background-color: lightgrey;
         border-color: black;

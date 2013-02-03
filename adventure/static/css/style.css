@@ -59,12 +59,7 @@ body {
 .result {
   position: relative;
   padding: 10px;
-  margin: 10px;
-  border-width: 1px;
-  border-color: transparent;
-  border-style: solid;
-  border-left-width: 0px;
-  border-right-width: 0px; }
+  margin: 10px; }
   .result:hover {
     background-color: lightgrey;
     border-color: black; }
