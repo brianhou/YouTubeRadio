@@ -74,11 +74,13 @@ body {
 
     &:hover{
         background-color: lightgrey;
-        border-color: black;
     }
 
     a {
-        text-decoration: none;
+        &:hover{
+            text-decoration: none;
+            color: #0088cc;
+        }
 
         span {
             position:absolute;
