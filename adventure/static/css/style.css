@@ -39,6 +39,9 @@ body {
     width: 40%;
     min-width: 350px; }
 
+#header input {
+  color: #555555; }
+
 #intro, #search, #play {
   display: none; }
 
