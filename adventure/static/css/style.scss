@@ -38,6 +38,13 @@ body {
     background: url(../img/cream_dust.png)
 }
 
+::selection {
+	background: #f89406; /* Safari */
+	}
+::-moz-selection {
+	background: #f89406; /* Firefox */
+}
+
 #header {
     margin-bottom: 35px;
     img {
