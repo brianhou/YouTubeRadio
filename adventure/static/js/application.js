@@ -64,6 +64,8 @@ function ytsearch(event) {
     if (query) {
         // Make sure player is hidden away.
         $("#play").fadeOut();
+        $("#slider").fadeOut();
+        $("#slider-text").fadeOut();
         $("#intro").fadeIn();
 
         // Use YouTube API to fetch search results
@@ -117,6 +119,7 @@ var watchHistory = [];
 var related = [];
 var oldRelated = [];
 var blacklist = [];
+var adventureNames = {1: "tea time with grandma", 25: "what happened last night"};
 
 function loadYTPlayer(video) {
     nextVideo = video;
@@ -209,10 +212,13 @@ function getRelated(videoID) {
 function selectNextVideo() {
     if (related.length > 1) {
         // Select the next video
-        //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
+        // nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0];
+        // Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
         blacklist.push(nextVideo["id"]);
-        nextVideo = related.splice(0, 1)[0];
+        var numVideos = $("#slider").slider("value");
+        nextVideo = related.splice(Math.floor(Math.random() * $("#slider").slider("value")), 1)[0];
+        // nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0];
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
                    "<p><b>{1}</b><br>" +
                    "by {2}<br>" +
@@ -227,6 +233,19 @@ function selectNextVideo() {
        alert("Oops! We ran out of suggested videos. Stick with the current one, or pick a new one to continue your adventure.");
     }
 }
+
+$(function() {
+    $("#slider").slider({
+        value: 1,
+        min: 1,
+        max: 25,
+        step: 24,
+        slide: function(event, ui) {
+            $("#adventure-type").val(adventureNames[ui.value]);
+        }
+    });
+    $("#adventure-type").val(adventureNames[$("#slider").slider("value")]);
+});
 
 /* Utility Functions */
 
