@@ -107,4 +107,4 @@ body {
   padding-bottom: 25px; }
 
 #shareLink {
-  color: #555555; }
+  max-width: 100%; }
