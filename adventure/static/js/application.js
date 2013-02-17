@@ -42,10 +42,14 @@ $(document).ready(function () {
                 $.each(data[1], function(key, val) {
                     suggestions.push({"value":val[0]});
                 });
-                suggestions.length = 5;
+                if(suggestions.length > 5) {
+                    suggestions.length = 5;
+                }
                 response(suggestions);
             };
-        }
+        },
+        minLength: 2,
+
     });
 
     $("#shareLink").click(function() {
@@ -68,33 +72,37 @@ function ytsearch(event) {
 
         // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
-        var data = {"q":query, "alt":"json", "max-results":"5", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
+        var data = {"q":query, "alt":"json", "max-results":"10", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
         $.getJSON(url, data, function (data) {
             // holds formatted search results
             var items = [];
             $.each(data.feed.entry, function (key, val) {
-                var videoID = val.media$group.yt$videoid.$t;
-                var video = { "id" : videoID,
-                            "thumbnail" : val.media$group.media$thumbnail[1].url,
-                            "title" : val.title.$t,
-                            "uploader" : val.author[0].name.$t,
-                            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-                            "views" : numAddCommas(val.yt$statistics.viewCount)};
-                searchResults[videoID] = video;
-                // construct the div for each search result
-                var html = "<div class=\"result\">" +
-                            "<img class= \"img-rounded left\" src=\"{1}\"/>" +
-                            "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
-                            "by {3}<br>" +
-                            "{4} | {5} views" +
-                            "<div class=\"clear\"></div></div>";
-                items.push(html.format(
-                            videoID,
-                            video["thumbnail"],
-                            video["title"],
-                            video["uploader"],
-                            video["length"],
-                            video["views"]));
+                try {
+                    var videoID = val.media$group.yt$videoid.$t;
+                    var video = { "id" : videoID,
+                                "thumbnail" : val.media$group.media$thumbnail[1].url,
+                                "title" : val.title.$t,
+                                "uploader" : val.author[0].name.$t,
+                                "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                                "views" : numAddCommas(val.yt$statistics.viewCount)};
+                    searchResults[videoID] = video;
+                    // construct the div for each search result
+                    var html = "<div class=\"result\">" +
+                                "<img class= \"img-rounded left\" src=\"{1}\"/>" +
+                                "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+                                "by {3}<br>" +
+                                "{4} | {5} views" +
+                                "<div class=\"clear\"></div></div>";
+                    items.push(html.format(
+                                videoID,
+                                video["thumbnail"],
+                                video["title"],
+                                video["uploader"],
+                                video["length"],
+                                video["views"]));
+                } catch (e) {
+                    return "continue"; // skip to next result item
+                }
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
