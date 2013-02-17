@@ -100,6 +100,9 @@ body {
   border: solid black 1px; }
 
 /* JQuery UI autocomplete customization */
+.ui-widget {
+  font-size: 14px; }
+
 .ui-autocomplete-loading {
   background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat; }
 
