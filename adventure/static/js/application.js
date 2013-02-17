@@ -70,7 +70,8 @@ function ytsearch(event) {
         $("#play").fadeOut();
         $("#slider").fadeOut();
         $("#slider-text").fadeOut();
-        $("#intro").fadeIn();
+        // Remove the intro text
+        $("#intro").fadeOut();
 
         // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
@@ -116,7 +117,6 @@ function ytsearch(event) {
 
 function selectVideo(videoID) {
     $("#search").fadeOut();
-    $("#intro").fadeOut();
     $("#play").show();
     loadYTPlayer(searchResults[videoID]);
 }
