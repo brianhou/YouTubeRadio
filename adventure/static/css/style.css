@@ -67,7 +67,7 @@ body {
     /* IE Hack */
     background-image: url("../img/empty.gif"); }
 
-#historyBox {
+#watchHistory {
   white-space: nowrap;
   overflow-x: scroll; }
 
