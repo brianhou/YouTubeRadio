@@ -172,10 +172,10 @@ function updateHistory(video) {
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{1}\"/>" +
-               "<br><b>{2}</b><br>" +
+               "<p><b title=\"{2}\">{2}</b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
-               "<div class=\"clear\"></div></div>";
+               "</div>";
 
     $("#watchHistory").prepend(html.format(video["id"],
                                           video["thumbnail"],

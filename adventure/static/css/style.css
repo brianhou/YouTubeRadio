@@ -74,8 +74,11 @@ body {
 .history {
   width: 15%;
   display: inline-block;
-  margin: 15px;
-  white-space: normal; }
+  margin: 15px; }
+  .history > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 .left {
   float: left;
