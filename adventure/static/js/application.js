@@ -64,8 +64,6 @@ function ytsearch(event) {
     if (query) {
         // Make sure player is hidden away.
         $("#play").fadeOut();
-        $("#slider").fadeOut();
-        $("#slider-text").fadeOut();
         $("#intro").fadeIn();
 
         // Use YouTube API to fetch search results
@@ -124,7 +122,7 @@ var relatedSublist = [];
 
 $(function() {
     $("#slider").slider({
-        value: 1,
+        value: 10,
         min: 1,
         max: 25,
         step: 1,
