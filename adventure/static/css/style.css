@@ -31,10 +31,13 @@ body {
   margin-right: auto;
   background: url(../img/cream_dust.png); }
 
-#header img {
-  padding: 15px;
-  padding-top: 25px;
-  width: 40%; }
+#header {
+  margin-bottom: 35px; }
+  #header img {
+    padding: 15px;
+    padding-top: 25px;
+    width: 40%;
+    min-width: 350px; }
 
 #intro, #search, #play {
   display: none; }
@@ -45,27 +48,22 @@ body {
 .result {
   position: relative;
   padding: 10px;
-  margin: 10px;
-  border-width: 1px;
-  border-color: transparent;
-  border-style: solid;
-  border-left-width: 0px;
-  border-right-width: 0px; }
+  margin: 10px; }
   .result:hover {
-    background-color: lightgrey;
-    border-color: black; }
-  .result a {
-    text-decoration: none; }
-    .result a span {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      /* In case any other links are present */
-      z-index: 1;
-      /* IE Hack */
-      background-image: url("../img/empty.gif"); }
+    background-color: #e5e5e5; }
+  .result a:hover {
+    text-decoration: none;
+    color: #0088cc; }
+  .result a span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* In case any other links are present */
+    z-index: 1;
+    /* IE Hack */
+    background-image: url("../img/empty.gif"); }
 
 #historyBox {
   white-space: nowrap;
@@ -102,11 +100,11 @@ body {
   border: solid black 1px; }
 
 /* JQuery UI autocomplete customization */
+.ui-widget {
+  font-size: 14px; }
+
 .ui-autocomplete-loading {
   background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat; }
 
 #ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox {
   padding-bottom: 25px; }
-
-#shareLink {
-  max-width: 100%; }

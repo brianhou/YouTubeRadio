@@ -38,10 +38,14 @@ body {
     background: url(../img/cream_dust.png)
 }
 
-#header img {
-    padding: 15px;
-    padding-top: 25px;
-    width: 40%;
+#header {
+    margin-bottom: 35px;
+    img {
+        padding: 15px;
+        padding-top: 25px;
+        width: 40%;
+        min-width: 350px;
+    }
 }
 
 #intro, #search, #play {
@@ -57,25 +61,15 @@ body {
     padding: 10px;
     margin: 10px;
 
-    border: {
-        width: 1px;
-        color: transparent;
-        style: solid;
-        left: {
-            width: 0px;
-        }
-        right: {
-            width: 0px;
-        }
-    }
-
     &:hover{
-        background-color: lightgrey;
-        border-color: black;
+        background-color: #e5e5e5;
     }
 
     a {
-        text-decoration: none;
+        &:hover{
+            text-decoration: none;
+            color: #0088cc;
+        }
 
         span {
             position:absolute;
@@ -130,15 +124,14 @@ body {
 }
 
 /* JQuery UI autocomplete customization */
+.ui-widget {
+    font-size: 14px;
+}
 .ui-autocomplete-loading {
     background: white url('../img/ui-anim_basic_16x16.gif') right center no-repeat;
 }
 
 #ytplayer, #videoInfo, #nextVidBox, #shareBox, #historyBox{
     padding-bottom: 25px;
-}
-
-#shareLink {
-    max-width: 100%;
 }
 

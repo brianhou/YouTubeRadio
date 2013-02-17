@@ -4,9 +4,12 @@
         <title>YouTube Adventure</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui-1.10.0.custom.css" %}">
+        <!--[if IE 7]>
+            <link type="text/css" href="{% static "css/jquery.ui.1.10.0.ie.css" %}" rel="stylesheet" />
+        <![endif]-->
         <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
         <link rel="icon" type="img/png" href="{% static "img/favicon.png" %}">
         <!-- should replace this with our own logo; this logo is stolen from http://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Radio.svg/48px-Radio.svg.png -->
 
@@ -24,7 +27,7 @@
                     <img src="{% static "img/logo.png" %}" alt="YouTube Adventure!"/>
                 </a>
                 <form class="form-search" method="get" action="#">
-                    <input type="text" class="input-xlarge search-query" autofocus id="search_query" name="search" placeholder="What are you looking for?">
+                    <input type="text" class="input-xlarge search-query" autofocus id="search_query" autocomplete="off" name="search" placeholder="What are you looking for?">
                     <button class="btn btn-primary" id="search_button" type="submit"><i class="icon-search icon-white"></i> Search</button>
                 </form>
             </div>
@@ -41,7 +44,7 @@
         </div>
         <div id="footer" class="container-fluid">
             <div class="row-fluid">
-                <p id="authors" class="span6">Created by Shreyas Chand, Brian Hou, and Marvin Zhang.</p>
+                <p id="authors" class="span6">Created by <a href="http://shreyaschand.com" target="_blank">Shreyas Chand</a>, <a href="http://brianhou.com" target="_blank">Brian Hou</a>, and <a href="http://marvinzhang.com" target="_blank">Marvin Zhang</a>.</p>
                 <p id="feedback" class="span6"><a href="https://docs.google.com/spreadsheet/viewform?formkey=dEgzVXo4SWhUUXltYnMwY0lwOEFTc3c6MQ">Give us feedback! (Please?)</a></p>
             </div>
         </div>
