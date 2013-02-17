@@ -67,14 +67,8 @@ function ytsearch(event) {
     if (query) {
         // Make sure player is hidden away.
         $("#play").fadeOut();
-<<<<<<< HEAD
-        $("#intro").fadeIn();
-=======
-        $("#slider").fadeOut();
-        $("#slider-text").fadeOut();
         // Remove the intro text
         $("#intro").fadeOut();
->>>>>>> aabd6ee8c7296c3879b40b5bf4b44e4d5f7646ff
 
         // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
