@@ -126,7 +126,6 @@ var nextVideo;
 var numVideos;
 var watchHistory = [];
 var related = [];
-var oldRelated = [];
 var blacklist = [];
 var relatedSublist = [];
 
@@ -206,7 +205,6 @@ function updateHistory(video) {
 function getRelated(videoID) {
     numVideos = $("#slider").slider("value");
     var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
-    oldRelated.push.apply(oldRelated, related); // append the previous related list to the oldRelated list
 
     // Clear the related list
     related.length = 0;
