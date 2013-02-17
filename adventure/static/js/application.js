@@ -124,7 +124,7 @@ var nextVideo;
 var watchHistory = [];
 var related = [];
 var oldRelated = [];
-var blacklist = [];
+var blacklist = {}; // use a dictionary like a set to remove duplicates
 
 function loadYTPlayer(video) {
     nextVideo = video;
@@ -167,22 +167,31 @@ function watch(video) {
     getRelated(video["id"]);
 }
 
+function watchHistoricVideo(videoID) {
+    $.each(watchHistory, function(key, val) {
+        if (val["id"] === videoID) {
+            watch(val);
+            return false;
+        }
+    });
+}
+
 function updateHistory(video) {
-    blacklist.push(video["id"]);
+    blacklist[video["id"]] = true;
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
-               "<img class= \"img-rounded\" src=\"{1}\"/>" +
-               "<p><b title=\"{2}\">{2}</b><br>" +
+               "<img class= \"img-rounded\" src=\"{0}\"/>" +
+               "<p><b><a href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
                "</div>";
 
-    $("#watchHistory").prepend(html.format(video["id"],
-                                          video["thumbnail"],
-                                          video["title"],
-                                          video["uploader"],
-                                          video["length"],
-                                          video["views"]));
+    $("#watchHistory").prepend(html.format(video["thumbnail"],
+                                           video["id"],
+                                           video["title"],
+                                           video["uploader"],
+                                           video["length"],
+                                           video["views"]));
 }
 
 function getRelated(videoID) {
@@ -202,7 +211,7 @@ function getRelated(videoID) {
                         "uploader" : val.author[0].name.$t,
                         "length" : secondsToHMS(val.media$group.yt$duration.seconds),
                         "views" : numAddCommas(val.yt$statistics.viewCount)};
-            if (! isBlacklisted(video["id"])) {
+            if (! (video["id"] in blacklist)) {
                 related.push(video);
             }
             // val.gd$rating.average is the score from 1 to 5
@@ -219,7 +228,7 @@ function selectNextVideo() {
         // Select the next video
         //nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0]; //Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
-        blacklist.push(nextVideo["id"]);
+        blacklist[nextVideo["id"]] = true;
         nextVideo = related.splice(0, 1)[0];
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
                    "<p><b>{1}</b><br>" +
@@ -237,15 +246,6 @@ function selectNextVideo() {
 }
 
 /* Utility Functions */
-
-function isBlacklisted(videoID) {
-    for (var i=0; i < blacklist.length; i++) {
-        if (blacklist[i] == videoID) {
-            return true;
-        }
-    }
-    return false;
-}
 
 String.prototype.format = function() {
     var formatted = this;
