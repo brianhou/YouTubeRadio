@@ -69,7 +69,7 @@ body {
 
 #watchHistory {
   white-space: nowrap;
-  overflow-x: scroll; }
+  overflow-x: auto; }
 
 .history {
   width: 15%;
