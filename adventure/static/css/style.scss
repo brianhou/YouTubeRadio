@@ -89,16 +89,20 @@ body {
     }
 }
 
-#historyBox {
+#watchHistory {
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .history {
     width: 15%;
     display: inline-block;
     margin: 15px;
-    white-space: normal;
+    > p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .left {

@@ -144,7 +144,7 @@ $(function() {
 
 function loadYTPlayer(video) {
     nextVideo = video;
-    var params = { allowScriptAccess: "always" };
+    var params = { allowScriptAccess: "always", allowFullScreen: true };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
     swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
@@ -188,10 +188,10 @@ function updateHistory(video) {
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{1}\"/>" +
-               "<br><b>{2}</b><br>" +
+               "<p><b title=\"{2}\">{2}</b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
-               "<div class=\"clear\"></div></div>";
+               "</div>";
 
     $("#watchHistory").prepend(html.format(video["id"],
                 video["thumbnail"],
