@@ -128,7 +128,7 @@ var blacklist = [];
 
 function loadYTPlayer(video) {
     nextVideo = video;
-    var params = { allowScriptAccess: "always" };
+    var params = { allowScriptAccess: "always", allowFullScreen: true };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
     swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
