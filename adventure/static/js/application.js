@@ -90,7 +90,7 @@ function ytsearch(event) {
                     // construct the div for each search result
                     var html = "<div class=\"result\">" +
                                 "<img class= \"img-rounded left\" src=\"{1}\"/>" +
-                                "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+                                "<b><a class=\"extendedLink\" href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
                                 "by {3}<br>" +
                                 "{4} | {5} views" +
                                 "<div class=\"clear\"></div></div>";
@@ -181,7 +181,7 @@ function updateHistory(video) {
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{0}\"/>" +
-               "<p><b><a href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
+               "<p><b><a class=\"extendedLink\" href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
                "</div>";

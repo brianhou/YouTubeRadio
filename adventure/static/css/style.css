@@ -53,29 +53,34 @@ body {
     height: 120px; }
   .result:hover {
     background-color: #e5e5e5; }
-  .result a:hover {
-    text-decoration: none;
-    color: #0088cc; }
-  .result a span {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    /* In case any other links are present */
-    z-index: 1;
-    /* IE Hack */
-    background-image: url("../img/empty.gif"); }
+
+.extendedLink:hover {
+  text-decoration: none;
+  color: #0088cc; }
+.extendedLink span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* In case any other links are present */
+  z-index: 1;
+  /* IE Hack */
+  background-image: url("../img/empty.gif"); }
 
 #watchHistory {
   white-space: nowrap;
   overflow-x: auto; }
 
 .history {
+  position: relative;
   width: 15%;
   display: inline-block;
-  margin: 15px; }
-  .history > p {
+  padding: 10px 10px 0 10px;
+  margin-right: 15px; }
+  .history:hover {
+    background-color: #e5e5e5; }
+  .history p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; }
