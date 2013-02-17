@@ -10,11 +10,11 @@ $(document).ready(function () {
         var data = {"alt":"json", "v":"2", "key":DEVKEY};
         $.getJSON(url, data, function (data) {
             var vid = { "id" : data.entry.media$group.yt$videoid.$t,
-                "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
-            "title" : data.entry.title.$t,
-            "uploader" : data.entry.author[0].name.$t,
-            "length" : secondsToHMS(data.entry.media$group.yt$duration.seconds),
-            "views" : numAddCommas(data.entry.yt$statistics.viewCount)};
+                        "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
+                        "title" : data.entry.title.$t,
+                        "uploader" : data.entry.author[0].name.$t,
+                        "length" : secondsToHMS(data.entry.media$group.yt$duration.seconds),
+                        "views" : numAddCommas(data.entry.yt$statistics.viewCount)};
             loadYTPlayer(vid);
         });
     } else {
@@ -30,22 +30,25 @@ $(document).ready(function () {
     $("#search_query").autocomplete({
         source: function(request, response) {
             $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
-                {
-                    "hl":"en", // Language
-                "ds":"yt", // Restrict lookup to youtube
-                "jsonp":"suggestCallBack", // jsonp callback function name
-                "q":request.term, // query term
-                "client":"youtube" // force youtube style response, ie json
+                {"hl":"en", // Language
+                 "ds":"yt", // Restrict lookup to youtube
+                 "jsonp":"suggestCallBack", // jsonp callback function name
+                 "q":request.term, // query term
+                 "client":"youtube" // force youtube style response, ie json
                 });
             suggestCallBack = function (data) {
                 var suggestions = [];
                 $.each(data[1], function(key, val) {
                     suggestions.push({"value":val[0]});
                 });
-                suggestions.length = 5;
+                if(suggestions.length > 5) {
+                    suggestions.length = 5;
+                }
                 response(suggestions);
             };
-        }
+        },
+        minLength: 2,
+
     });
 
     $("#shareLink").click(function() {
@@ -64,37 +67,48 @@ function ytsearch(event) {
     if (query) {
         // Make sure player is hidden away.
         $("#play").fadeOut();
+<<<<<<< HEAD
         $("#intro").fadeIn();
+=======
+        $("#slider").fadeOut();
+        $("#slider-text").fadeOut();
+        // Remove the intro text
+        $("#intro").fadeOut();
+>>>>>>> aabd6ee8c7296c3879b40b5bf4b44e4d5f7646ff
 
         // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
-        var data = {"q":query, "alt":"json", "max-results":"5", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
+        var data = {"q":query, "alt":"json", "max-results":"10", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
         $.getJSON(url, data, function (data) {
             // holds formatted search results
             var items = [];
             $.each(data.feed.entry, function (key, val) {
-                var videoID = val.media$group.yt$videoid.$t;
-                var video = { "id" : videoID,
-                    "thumbnail" : val.media$group.media$thumbnail[1].url,
-                "title" : val.title.$t,
-                "uploader" : val.author[0].name.$t,
-                "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-                "views" : numAddCommas(val.yt$statistics.viewCount)};
-                searchResults[videoID] = video;
-                // construct the div for each search result
-                var html = "<div class=\"result\">" +
-                "<img class= \"img-rounded left\" src=\"{1}\"/>" +
-                "<b><a href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
-                "by {3}<br>" +
-                "{4} | {5} views" +
-                "<div class=\"clear\"></div></div>";
-            items.push(html.format(
-                    videoID,
-                    video["thumbnail"],
-                    video["title"],
-                    video["uploader"],
-                    video["length"],
-                    video["views"]));
+                try {
+                    var videoID = val.media$group.yt$videoid.$t;
+                    var video = { "id" : videoID,
+                                  "thumbnail" : val.media$group.media$thumbnail[1].url,
+                                  "title" : val.title.$t,
+                                  "uploader" : val.author[0].name.$t,
+                                  "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                                  "views" : numAddCommas(val.yt$statistics.viewCount)};
+                    searchResults[videoID] = video;
+                    // construct the div for each search result
+                    var html = "<div class=\"result\">" +
+                                "<img class= \"img-rounded left\" src=\"{1}\"/>" +
+                                "<b><a class=\"extendedLink\" href=\"javascript:selectVideo(\'{0}\')\"><span></span>{2}</a></b><br>" +
+                                "by {3}<br>" +
+                                "{4} | {5} views" +
+                                "<div class=\"clear\"></div></div>";
+                    items.push(html.format(
+                                videoID,
+                                video["thumbnail"],
+                                video["title"],
+                                video["uploader"],
+                                video["length"],
+                                video["views"]));
+                } catch (e) {
+                    return "continue"; // skip to next result item
+                }
             });
             // Insert the search results and set their click listener
             $("#search_results").html(items.join(""));
@@ -106,7 +120,6 @@ function ytsearch(event) {
 
 function selectVideo(videoID) {
     $("#search").fadeOut();
-    $("#intro").fadeOut();
     $("#play").show();
     loadYTPlayer(searchResults[videoID]);
 }
@@ -116,8 +129,7 @@ var nextVideo;
 var numVideos;
 var watchHistory = [];
 var related = [];
-var oldRelated = [];
-var blacklist = [];
+var blacklist = {}; // use a dictionary like a set to remove duplicates
 var relatedSublist = [];
 
 $(function() {
@@ -133,10 +145,9 @@ $(function() {
     $("#adventure-type").val($("#slider").slider("value"));
 });
 
-
 function loadYTPlayer(video) {
     nextVideo = video;
-    var params = { allowScriptAccess: "always" };
+    var params = { allowScriptAccess: "always", allowFullScreen: true };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
     swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
@@ -175,28 +186,36 @@ function watch(video) {
     getRelated(video["id"]);
 }
 
+function watchHistoricVideo(videoID) {
+    $.each(watchHistory, function(key, val) {
+        if (val["id"] === videoID) {
+            watch(val);
+            return false;
+        }
+    });
+}
+
 function updateHistory(video) {
-    blacklist.push(video["id"]);
+    blacklist[video["id"]] = true;
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
-        "<img class= \"img-rounded\" src=\"{1}\"/>" +
-        "<br><b>{2}</b><br>" +
-        "by {3}<br>" +
-        "{4} | {5} views</p>" +
-        "<div class=\"clear\"></div></div>";
+               "<img class= \"img-rounded\" src=\"{0}\"/>" +
+               "<p><b><a class=\"extendedLink\" href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
+               "by {3}<br>" +
+               "{4} | {5} views</p>" +
+               "</div>";
 
-    $("#watchHistory").prepend(html.format(video["id"],
-                video["thumbnail"],
-                video["title"],
-                video["uploader"],
-                video["length"],
-                video["views"]));
+    $("#watchHistory").prepend(html.format(video["thumbnail"],
+                                           video["id"],
+                                           video["title"],
+                                           video["uploader"],
+                                           video["length"],
+                                           video["views"]));
 }
 
 function getRelated(videoID) {
     numVideos = $("#slider").slider("value");
     var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
-    oldRelated.push.apply(oldRelated, related); // append the previous related list to the oldRelated list
 
     // Clear the related list
     related.length = 0;
@@ -206,12 +225,12 @@ function getRelated(videoID) {
     $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
             var video = { "id" : val.media$group.yt$videoid.$t,
-                "thumbnail" : val.media$group.media$thumbnail[1].url,
-            "title" : val.title.$t,
-            "uploader" : val.author[0].name.$t,
-            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-            "views" : numAddCommas(val.yt$statistics.viewCount)};
-            if (! isBlacklisted(video["id"])) {
+                          "thumbnail" : val.media$group.media$thumbnail[1].url,
+                          "title" : val.title.$t,
+                          "uploader" : val.author[0].name.$t,
+                          "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                          "views" : numAddCommas(val.yt$statistics.viewCount)};
+            if (! (video["id"] in blacklist)) {
                 related.push(video);
             }
             // val.gd$rating.average is the score from 1 to 5
@@ -230,17 +249,17 @@ function selectNextVideo() {
         // nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0];
         // Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
-        blacklist.push(nextVideo["id"]);
+        blacklist[nextVideo["id"]] = true;
         if (relatedSublist.length > 0) {
             nextVideo = relatedSublist.splice(Math.floor(Math.random() * relatedSublist.length), 1)[0];
         } else {
             nextVideo = related.splice(numVideos, 1)[0];
         }
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
-            "<p><b>{1}</b><br>" +
-            "by {2}<br>" +
-            "{3} | {4} views</p>" +
-            "<div class=\"clear\"></div>";
+                   "<p><b>{1}</b><br>" +
+                   "by {2}<br>" +
+                   "{3} | {4} views</p>" +
+                   "<div class=\"clear\"></div>";
         $("#upNext").html(html.format(nextVideo["thumbnail"],
                     nextVideo["title"],
                     nextVideo["uploader"],
@@ -252,15 +271,6 @@ function selectNextVideo() {
 }
 
 /* Utility Functions */
-
-function isBlacklisted(videoID) {
-    for (var i=0; i < blacklist.length; i++) {
-        if (blacklist[i] == videoID) {
-            return true;
-        }
-    }
-    return false;
-}
 
 String.prototype.format = function() {
     var formatted = this;
