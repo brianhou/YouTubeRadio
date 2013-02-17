@@ -10,11 +10,11 @@ $(document).ready(function () {
         var data = {"alt":"json", "v":"2", "key":DEVKEY};
         $.getJSON(url, data, function (data) {
             var vid = { "id" : data.entry.media$group.yt$videoid.$t,
-                "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
-            "title" : data.entry.title.$t,
-            "uploader" : data.entry.author[0].name.$t,
-            "length" : secondsToHMS(data.entry.media$group.yt$duration.seconds),
-            "views" : numAddCommas(data.entry.yt$statistics.viewCount)};
+                        "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
+                        "title" : data.entry.title.$t,
+                        "uploader" : data.entry.author[0].name.$t,
+                        "length" : secondsToHMS(data.entry.media$group.yt$duration.seconds),
+                        "views" : numAddCommas(data.entry.yt$statistics.viewCount)};
             loadYTPlayer(vid);
         });
     } else {
@@ -30,12 +30,11 @@ $(document).ready(function () {
     $("#search_query").autocomplete({
         source: function(request, response) {
             $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
-                {
-                    "hl":"en", // Language
-                "ds":"yt", // Restrict lookup to youtube
-                "jsonp":"suggestCallBack", // jsonp callback function name
-                "q":request.term, // query term
-                "client":"youtube" // force youtube style response, ie json
+                {"hl":"en", // Language
+                 "ds":"yt", // Restrict lookup to youtube
+                 "jsonp":"suggestCallBack", // jsonp callback function name
+                 "q":request.term, // query term
+                 "client":"youtube" // force youtube style response, ie json
                 });
             suggestCallBack = function (data) {
                 var suggestions = [];
@@ -83,11 +82,11 @@ function ytsearch(event) {
                 try {
                     var videoID = val.media$group.yt$videoid.$t;
                     var video = { "id" : videoID,
-                                "thumbnail" : val.media$group.media$thumbnail[1].url,
-                                "title" : val.title.$t,
-                                "uploader" : val.author[0].name.$t,
-                                "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-                                "views" : numAddCommas(val.yt$statistics.viewCount)};
+                                  "thumbnail" : val.media$group.media$thumbnail[1].url,
+                                  "title" : val.title.$t,
+                                  "uploader" : val.author[0].name.$t,
+                                  "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                                  "views" : numAddCommas(val.yt$statistics.viewCount)};
                     searchResults[videoID] = video;
                     // construct the div for each search result
                     var html = "<div class=\"result\">" +
@@ -188,11 +187,11 @@ function updateHistory(video) {
     blacklist.push(video["id"]);
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
-        "<img class= \"img-rounded\" src=\"{1}\"/>" +
-        "<br><b>{2}</b><br>" +
-        "by {3}<br>" +
-        "{4} | {5} views</p>" +
-        "<div class=\"clear\"></div></div>";
+               "<img class= \"img-rounded\" src=\"{1}\"/>" +
+               "<br><b>{2}</b><br>" +
+               "by {3}<br>" +
+               "{4} | {5} views</p>" +
+               "<div class=\"clear\"></div></div>";
 
     $("#watchHistory").prepend(html.format(video["id"],
                 video["thumbnail"],
@@ -214,11 +213,11 @@ function getRelated(videoID) {
     $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
             var video = { "id" : val.media$group.yt$videoid.$t,
-                "thumbnail" : val.media$group.media$thumbnail[1].url,
-            "title" : val.title.$t,
-            "uploader" : val.author[0].name.$t,
-            "length" : secondsToHMS(val.media$group.yt$duration.seconds),
-            "views" : numAddCommas(val.yt$statistics.viewCount)};
+                          "thumbnail" : val.media$group.media$thumbnail[1].url,
+                          "title" : val.title.$t,
+                          "uploader" : val.author[0].name.$t,
+                          "length" : secondsToHMS(val.media$group.yt$duration.seconds),
+                          "views" : numAddCommas(val.yt$statistics.viewCount)};
             if (! isBlacklisted(video["id"])) {
                 related.push(video);
             }
@@ -245,10 +244,10 @@ function selectNextVideo() {
             nextVideo = related.splice(numVideos, 1)[0];
         }
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
-            "<p><b>{1}</b><br>" +
-            "by {2}<br>" +
-            "{3} | {4} views</p>" +
-            "<div class=\"clear\"></div>";
+                   "<p><b>{1}</b><br>" +
+                   "by {2}<br>" +
+                   "{3} | {4} views</p>" +
+                   "<div class=\"clear\"></div>";
         $("#upNext").html(html.format(nextVideo["thumbnail"],
                     nextVideo["title"],
                     nextVideo["uploader"],
