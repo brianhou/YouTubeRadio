@@ -125,7 +125,9 @@ var watchHistory = [];
 var related = [];
 var blacklist = {}; // use a dictionary like a set to remove duplicates
 var relatedSublist = [];
-var adventureNames = {0: "Enjoy your tea time with grandma.", 1: "Kinda adventurous I suppose...", 2: "Ok now we're talking!", 3: "Whoa dude, slow down there...", 4: "Dude... what happened last night?"};
+var adventureNames = {0: "I'd rather have tea time with grammy.",
+    1: "Kinda adventurous I suppose...", 2: "Ok, but no freaky stuff...",
+    3: "Hell yeah, let's live life on the edge!", 4: "Show me things I will never unsee."};
 
 $(function() {
     $("#slider").slider({
