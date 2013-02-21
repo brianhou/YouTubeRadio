@@ -14,14 +14,14 @@
                 <p class="lead">Up Next:</p>
                 <div id="upNext"></div>
                 <button class="btn btn-success" type="button" onclick="javascript:watch(nextVideo);"><i class="icon-thumbs-up icon-white"></i> Play It!</button>
-                <button class="btn btn-danger" type="button" onclick="javascript:selectNextVideo();"><i class="icon-thumbs-down icon-white"></i> Skip It!</button>
+                <button class="btn btn-danger" type="button" onclick="javascript:selectNextVideo(true);"><i class="icon-thumbs-down icon-white"></i> Skip It!</button>
             </div>
             <div class="well" id="slider-text">
-                <label for="adventure-type"># of related videos to choose from?</label>
-                <input type="text" id="adventure-type" style="border: 0; color: #000000; font-weight:bold;" />
+                <p class="lead">Feeling adventurous?</p>
+                <input type="hidden" id="adventure-type" style="border: 0; color: #000000; font-weight:bold;" />
+                <p id="adventure-title" style="color: #000000;"></p>
                 <div id="slider"></div>
             </div>
-            <div id="shareBox" class="well"><p class="lead">Share this Adventure:</p><input id="shareLink" class="span12" type="text"></input></div>
         </div>
         <div class="offset1 span8">
             <div id="ytplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>
@@ -29,7 +29,8 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="well span12">
+        <div id="shareBox" class="well span3"><p class="lead">Share this adventure:</p><input id="shareLink" class="span12" type="text"></input></div>
+        <div class="well span9">
             <p class="lead">History:</p>
             <div id="watchHistory"></div>
         </div>

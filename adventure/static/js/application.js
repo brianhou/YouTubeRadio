@@ -125,6 +125,9 @@ var watchHistory = [];
 var related = [];
 var blacklist = {}; // use a dictionary like a set to remove duplicates
 var relatedSublist = [];
+var adventureNames = {0: "I'd rather have tea time with grammy.",
+    1: "Kinda adventurous I suppose...", 2: "Ok, but no freaky stuff...",
+    3: "Hell yeah, let's live life on the edge!", 4: "Show me things I will never unsee."};
 
 $(function() {
     $("#slider").slider({
@@ -134,9 +137,12 @@ $(function() {
         step: 1,
         slide: function(event, ui) {
             $("#adventure-type").val(ui.value);
+            $("#adventure-title").text(adventureNames[parseInt((ui.value-1) / 5)]);
+            getRelated(document.location.hash.slice(1), false);
         }
     });
     $("#adventure-type").val($("#slider").slider("value"));
+    $("#adventure-title").text(adventureNames[parseInt(($("#slider").slider("value")-1) / 5)]);
 });
 
 function loadYTPlayer(video) {
@@ -177,7 +183,7 @@ function watch(video) {
     ytplayer.loadVideoById(video["id"]);
 
     // Setup for the next video
-    getRelated(video["id"]);
+    getRelated(video["id"], true);
 }
 
 function watchHistoricVideo(videoID) {
@@ -207,8 +213,8 @@ function updateHistory(video) {
                                            video["views"]));
 }
 
-function getRelated(videoID) {
-    numVideos = $("#slider").slider("value");
+function getRelated(videoID, blacklisted) {
+    numVideos = parseInt($("#adventure-type").val());
     var relatedURL = "https://gdata.youtube.com/feeds/api/videos/{0}/related".format(videoID);
 
     // Clear the related list
@@ -233,17 +239,19 @@ function getRelated(videoID) {
         });
         relatedSublist = related.slice(0);
         relatedSublist.splice(numVideos);
-        selectNextVideo();
+        selectNextVideo(blacklisted);
     });
 }
 
-function selectNextVideo() {
+function selectNextVideo(blacklisted) {
     if (related.length > numVideos || relatedSublist.length > 0) {
         // Select the next video
         // nextVideo = related.splice(Math.floor(Math.random() * related.length), 1)[0];
         // Splice a random item off the list and designate as the next video
         // Videos are ordered by relevance, so maybe selecting the first instead of a random will give better results.
-        blacklist[nextVideo["id"]] = true;
+        if (blacklisted) {
+            blacklist[nextVideo["id"]] = true;
+        }
         if (relatedSublist.length > 0) {
             nextVideo = relatedSublist.splice(Math.floor(Math.random() * relatedSublist.length), 1)[0];
         } else {
