@@ -200,7 +200,7 @@ function updateHistory(video) {
     watchHistory.push(video);
     var html = "<div class=\"history\">" +
                "<img class= \"img-rounded\" src=\"{0}\"/>" +
-               "<p><b><a class=\"extendedLink\" href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
+               "<p><b title=\"{2}\"><a class=\"extendedLink\" href=\"javascript:watchHistoricVideo(\'{1}\');\"><span></span>{2}</a></b><br>" +
                "by {3}<br>" +
                "{4} | {5} views</p>" +
                "</div>";
@@ -258,10 +258,9 @@ function selectNextVideo(blacklisted) {
             nextVideo = related.splice(numVideos, 1)[0];
         }
         var html = "<img class= \"img-rounded\" src=\"{0}\"/>" +
-                   "<p><b>{1}</b><br>" +
+                   "<p><b title=\"{1}\">{1}</b><br>" +
                    "by {2}<br>" +
-                   "{3} | {4} views</p>" +
-                   "<div class=\"clear\"></div>";
+                   "{3} | {4} views</p>";
         $("#upNext").html(html.format(nextVideo["thumbnail"],
                     nextVideo["title"],
                     nextVideo["uploader"],

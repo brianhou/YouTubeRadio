@@ -54,6 +54,11 @@ body {
   .result:hover {
     background-color: #e5e5e5; }
 
+#upNext p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .extendedLink:hover {
   text-decoration: none;
   color: #0088cc; }
