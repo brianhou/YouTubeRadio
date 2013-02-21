@@ -65,6 +65,9 @@ function ytsearch(event) {
     event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
+        if (event.which == 13) {
+            $("#search_query").autocomplete("close");
+        }
         // Make sure player is hidden away.
         $("#play").fadeOut();
         // Remove the intro text
