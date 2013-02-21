@@ -61,8 +61,14 @@ body {
     clear: both;
 }
 
+#intro {
+    .lead {
+        margin-bottom: 0px;
+    }
+}
+
 #introText {
-    font-size: 19px;
+    font-size: 16px;
     line-height: 27px;
     font-weight: 200;
 }
