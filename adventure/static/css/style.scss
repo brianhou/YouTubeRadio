@@ -12,6 +12,7 @@ html, body {
 #push {
     height: 60px;
 }
+
 #footer {
     height: 20px;
     padding: 20px;
@@ -60,6 +61,12 @@ body {
     clear: both;
 }
 
+#introText {
+    font-size: 19px;
+    line-height: 27px;
+    font-weight: 200;
+}
+
 .result {
     position: relative;
     padding: 10px;
@@ -74,6 +81,7 @@ body {
     }
 
 }
+
 #upNext p {
     white-space: nowrap;
     overflow: hidden;
