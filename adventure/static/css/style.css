@@ -18,6 +18,9 @@ html, body {
   background-color: #e5e5e5; }
   #footer #feedback {
     text-align: right; }
+    #footer #feedback img {
+      margin: -8px auto;
+      padding-left: 20px; }
 
 @media (max-width: 767px) {
   #footer {
