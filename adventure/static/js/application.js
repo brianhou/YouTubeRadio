@@ -7,7 +7,7 @@ $(document).ready(function () {
         $("#play").show();
         var videoID = document.location.hash.slice(1);
         var url = "https://gdata.youtube.com/feeds/api/videos/{0}".format(videoID);
-        var data = {"alt":"json", "v":"2", "key":DEVKEY};
+        var data = {"alt":"json", "v":"2"};
         $.getJSON(url, data, function (data) {
             var vid = { "id" : data.entry.media$group.yt$videoid.$t,
                         "thumbnail" : data.entry.media$group.media$thumbnail[1].url,
@@ -57,8 +57,6 @@ $(document).ready(function () {
 });
 
 
-var DEVKEY = 'AI39si5Qhb1zpJVCuudxeWSmOEI-9cDE2Cpk457J71XODD0pX6Buq3Hznh5ndANY9BHzuZ-fmtcnrbfTgBYgH1QvNuU7_ZeoYQ';
-
 var searchResults = {};
 
 function ytsearch(event) {
@@ -75,7 +73,7 @@ function ytsearch(event) {
 
         // Use YouTube API to fetch search results
         var url = "https://gdata.youtube.com/feeds/api/videos";
-        var data = {"q":query, "alt":"json", "max-results":"10", "v":"2", "orderby":"relevance", "key":DEVKEY, "format":"5"};
+        var data = {"q":query, "alt":"json", "max-results":"10", "v":"2", "orderby":"relevance", "format":"5"};
         $.getJSON(url, data, function (data) {
             // holds formatted search results
             var items = [];
@@ -224,7 +222,7 @@ function getRelated(videoID, blacklisted) {
     related.length = 0;
 
     // Get the related video stream
-    var data = {"alt":"json", "v":"2", "key":DEVKEY, "format":"5"};
+    var data = {"alt":"json", "v":"2", "format":"5"};
     $.getJSON(relatedURL, data, function (data) {
         $.each(data.feed.entry, function (key, val) {
             var video = { "id" : val.media$group.yt$videoid.$t,
