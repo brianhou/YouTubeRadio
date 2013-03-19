@@ -167,10 +167,6 @@ function playerStateChangeListener(event) {
     }
 }
 
-// Eventually should reduce stupid suggestions (like exact same video, duplicate music videos, and...?)
-// Check that new video IDs are not in watchHistory
-// A naive way to fix the second would be to check for different titles; not sure how much we can go beyond that.
-
 function watch(video) {
     // Set the hash and share url
     document.location.hash = video["id"];
@@ -185,6 +181,7 @@ function watch(video) {
 
     // Setup for the next video
     getRelated(video["id"], true);
+    return false;
 }
 
 function watchHistoricVideo(videoID) {
