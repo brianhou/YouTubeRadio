@@ -54,6 +54,13 @@ $(document).ready(function () {
     $("#shareLink").click(function() {
         this.select();
     });
+
+    $("#play-it").click(function() {
+        watch(nextVideo);
+    });
+    $("#skip-it").click(function() {
+        selectNextVideo(true);
+    });
 });
 
 
