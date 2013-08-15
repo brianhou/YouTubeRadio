@@ -70,7 +70,7 @@ function ytsearch(event) {
     event.preventDefault();
     var query = $("#search_query").val();
     if (query) {
-        if (event.which == 13) {
+        if (event.which == 13) { // event code 13 = enter key
             $("#search_query").autocomplete("close");
         }
         // Make sure player is hidden away.
