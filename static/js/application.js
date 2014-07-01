@@ -276,6 +276,27 @@ function selectNextVideo(blacklisted) {
     }
 }
 
+var rainbow = function(time) {
+    time = time || 500;
+    var selectors = ["#wrap", , "#footer", "#nextVidBox", "#slider-text",
+                     "#shareBox", "#historyWrapper"];
+    var colors = ["#6FFF00","#FF00FF","#FFFF00","#4D4DFF","#FE0001","#FF4105",
+                  "#993CF3","#00FFBC","#FF004F","#CCFF00"];
+
+    for (var i = 0; i < selectors.length; i++) {
+        var startingColor = colors[i % colors.length];
+        $(selectors[i]).css("background-color", startingColor);
+        function myChangeColor(j, id) {
+            j = (j + 1) % colors.length;
+            $(id).animate({backgroundColor: colors[j]}, time);
+            setTimeout(myChangeColor, time, j, id);
+        }
+        myChangeColor(i, selectors[i]);
+    }
+};
+
+var faberge = new Konami(rainbow);
+
 /* Utility Functions */
 
 String.prototype.format = function() {
