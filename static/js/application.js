@@ -278,10 +278,10 @@ function selectNextVideo(blacklisted) {
 
 var rainbow = function(time) {
     time = time || 500;
-    var selectors = ["#wrap", , "#footer", "#nextVidBox", "#slider-text",
+    var selectors = ["#wrap", "#footer", "#nextVidBox", "#slider-text",
                      "#shareBox", "#historyWrapper"];
-    var colors = ["#6FFF00","#FF00FF","#FFFF00","#4D4DFF","#FE0001","#FF4105",
-                  "#993CF3","#00FFBC","#FF004F","#CCFF00"];
+    var colors = ["#6FFF00", "#FF00FF", "#FFFF00", "#4D4DFF", "#FE0001", "#FF4105",
+                  "#993CF3", "#00FFBC", "#FF004F", "#CCFF00"];
 
     for (var i = 0; i < selectors.length; i++) {
         var startingColor = colors[i % colors.length];
