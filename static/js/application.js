@@ -29,7 +29,7 @@ $(document).ready(function () {
     // Initialize autocomplete for search terms
     $("#search_query").autocomplete({
         source: function(request, response) {
-            $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
+            $.getJSON("https://suggestqueries.google.com/complete/search?callback=?",
                 {"hl":"en", // Language
                  "ds":"yt", // Restrict lookup to youtube
                  "jsonp":"suggestCallBack", // jsonp callback function name
@@ -158,7 +158,7 @@ function loadYTPlayer(video) {
     var params = { allowScriptAccess: "always", allowFullScreen: true };
     var atts = { id: "ytplayer" };
     // must have a video id, otherwise an error is raised and onYouTubePlayerReady is never called
-    swfobject.embedSWF("http://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
+    swfobject.embedSWF("https://www.youtube.com/v/{0}?enablejsapi=1&playerapiid=ytplayer&version=3".format(video["id"]),
             "ytplayer", "640", "385", "8", null, null, params, atts);
 }
 
